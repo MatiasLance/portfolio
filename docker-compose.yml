@@ -1,0 +1,13 @@
+services:
+  app:
+    build:
+      context: .
+    image: portfolio-app
+    container_name: portfolio
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8000:3000"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
