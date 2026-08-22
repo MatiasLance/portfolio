@@ -1,0 +1,16 @@
+{
+  "name": "Marcelo Matias",
+  "short_name": "Matias",
+  "description": "Junior DevOps Engineer and Full-Stack Developer",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#F3F0E8",
+  "theme_color": "#0F6B63",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+services:
+  web:
+    build:
+      context: .
+      args:
+        VITE_BASE: ${VITE_BASE:-./}
+        VITE_SITE_URL: ${VITE_SITE_URL:-https://matiaslance.github.io}
+    image: marcelo-matias-portfolio:local
+    ports:
+      - "${PORT:-8080}:80"
+    restart: unless-stopped

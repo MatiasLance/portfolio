@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-paper text-ink antialiased transition-colors duration-200;
+    @apply dark:bg-night dark:text-night-ink;
+  }
+
+  :focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-pine;
+  }
+
+  ::selection {
+    @apply bg-pine-soft text-ink;
+  }
+
+  .dark ::selection {
+    background-color: #1a3d39;
+    color: #f3eee4;
+  }
+}
+
+@layer components {
+  .page-wrap {
+    @apply mx-auto w-full max-w-page px-5 sm:px-8 lg:px-10;
+  }
+
+  .section-space {
+    @apply scroll-mt-24 py-16 sm:py-20 lg:py-24;
+  }
+
+  .surface-card {
+    @apply border border-line bg-paper-raised shadow-card;
+    @apply dark:border-night-line dark:bg-night-raised dark:shadow-none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
