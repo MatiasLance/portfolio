@@ -73,6 +73,8 @@ The production output is written to `dist/`. The build also writes:
 
 GitHub Pages still hosts the static `dist` output. Docker Compose is for local preview and any container host; it is not required for Pages.
 
+GitHub Pages is free on a **public** repository. A private repository on the free plan shows an upgrade prompt instead. You do not need GitHub Pro if the repo is public.
+
 The repository includes `.github/workflows/deploy.yml`. After you push this project to GitHub:
 
 1. Create a repository under [MatiasLance](https://github.com/MatiasLance). Two common names:
@@ -99,7 +101,7 @@ If you add Vue Router later, use `createWebHashHistory()` or keep the generated 
 
 ### First-time checklist
 
-- [ ] Repository is public, or GitHub Pages is enabled for the private plan
+- [ ] Repository is **public** (Settings → General → Danger Zone → Change visibility). Pages on a private repo requires a paid plan.
 - [ ] Pages source is set to GitHub Actions
 - [ ] `index.html` canonical / Open Graph URLs match the deployed address
 - [ ] `src/data/portfolio.ts` email, GitHub, and LinkedIn links are current

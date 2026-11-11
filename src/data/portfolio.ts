@@ -142,7 +142,7 @@ export const skills = [
 export const experience: ExperienceRole[] = [
   {
     company: 'PageOne247',
-    title: 'Junior DevOps & Full-Stack Developer',
+    title: 'DevOps Engineer | Full-Stack & WordPress Engineer',
     period: '07/2022 - Present',
     location: 'Davao City, Philippines',
     summary:
@@ -177,38 +177,6 @@ export const experience: ExperienceRole[] = [
 
 export const projects: Project[] = [
   {
-    name: 'CRM System Development',
-    status: 'In progress',
-    description:
-      'Developing a scalable CRM platform built with Laravel, Docker Compose, and Nginx, featuring RESTful API integration and AI-assisted debugging workflows.',
-    problem:
-      'The team needed a dedicated client-management platform rather than stretching existing tools further.',
-    contributions: [
-      'Developing the CRM on Laravel with Docker Compose and Nginx.',
-      'Implementing REST API integration for client-server communication.',
-      'Using AI-assisted tools for debugging and feature delivery.',
-    ],
-    stack: ['Laravel', 'Docker Compose', 'Nginx', 'REST API', 'AI Development Tools'],
-    links: [],
-  },
-  {
-    name: 'TFW9S Staging & Production Deployment',
-    status: 'Featured',
-    description:
-      'Provisioned staging environments to validate "Waiting Lounge" feature prior to production release and implemented real-time data rendering using Socket.IO.',
-    problem:
-      'A new real-time feature needed a staging environment before it could be released safely to production.',
-    contributions: [
-      'Provisioned a staging environment to validate the Waiting Lounge feature before production release.',
-      'Implemented real-time data rendering with Socket.IO to improve user engagement.',
-    ],
-    stack: ['Vue.js', 'Socket.IO', 'Staging', 'Real-Time Data'],
-    links: [
-      { label: 'Frontend', href: 'https://github.com/MatiasLance/tfw9s-frontend' },
-      { label: 'Backend', href: 'https://github.com/MatiasLance/tfw9s-backend' },
-    ],
-  },
-  {
     name: 'Multi-Site WordPress Fleet Consolidation',
     status: 'Featured',
     description:
@@ -222,37 +190,6 @@ export const projects: Project[] = [
       'Achieved 67% hosting cost reduction ($1,200 → $400/month) while improving reliability.',
     ],
     stack: ['Docker', 'Docker Compose', 'Nginx Proxy Manager', 'DigitalOcean', 'WordPress', 'Laravel', 'Nuxt.js', 'Bash'],
-    links: [],
-  },
-  {
-    name: 'Custom WordPress Solutions & E-Commerce Integration',
-    status: 'Featured',
-    description:
-      'Engineered custom WordPress features and secure payment gateways beyond standard plugins to meet complex business requirements, including headless WordPress with Nuxt.js frontends.',
-    problem:
-      'Client requirements exceeded plugin capabilities — needing custom post types, advanced ACF layouts, secure e-path payment verification, Core Web Vitals optimization, and headless architecture.',
-    contributions: [
-      'Built custom PHP themes/plugins replacing bloated page builder stacks (Elementor, Divi, WPBakery).',
-      'Integrated secure e-path payment system with real-time verification.',
-      'Optimized Core Web Vitals and page speed scores across WordPress fleet.',
-      'Implemented headless WordPress + Nuxt.js for decoupled frontend architecture.',
-    ],
-    stack: ['WordPress', 'PHP', 'Nuxt.js', 'WooCommerce', 'Custom Plugins', 'Core Web Vitals', 'Headless CMS'],
-    links: [],
-  },
-  {
-    name: 'Muscle Prime Infrastructure Upgrade',
-    status: 'Featured',
-    description:
-      'Implemented real-time version notification modals, integrated a secure e-path payment system with real-time verification, and initiated Kubernetes transition for enhanced scalability.',
-    problem:
-      'Releases needed a clearer user-facing signal, and payments required a more reliable verification path.',
-    contributions: [
-      'Implemented a real-time version notification modal so users could see when a new deployment was available.',
-      'Integrated a secure e-path payment system with real-time verification.',
-      'Transitioning the project toward Kubernetes for improved scalability.',
-    ],
-    stack: ['Kubernetes', 'PHP', 'Docker', 'Payment Integration'],
     links: [],
   },
   {
@@ -476,7 +413,7 @@ export const businessSolutions: BusinessSolution[] = [
     title: 'Custom Web App Architecture & Scaling',
     description:
       'End-to-end design and delivery of resilient Laravel backends and high-speed Nuxt.js/Vue.js SPAs. From database schema to CI/CD, I build applications that scale with your business.',
-    icon: '🚀',
+    icon: 'rocket',
     features: [
       'Laravel API development with clean architecture',
       'Nuxt.js/Vue.js frontend with SSR/SSG',
@@ -491,7 +428,7 @@ export const businessSolutions: BusinessSolution[] = [
     title: 'Advanced WordPress Engineering & Optimization',
     description:
       'Transform WordPress from a blogging tool into a powerful application platform. Custom themes, plugins, headless architectures, and performance tuning that beats any page builder.',
-    icon: '⚡',
+    icon: 'zap',
     features: [
       'Custom theme & plugin development (PHP, ACF)',
       'Elementor/Divi/WPBakery migration to custom code',
@@ -506,7 +443,7 @@ export const businessSolutions: BusinessSolution[] = [
     title: 'Cloud & Infrastructure Cost Optimization',
     description:
       'Consolidate your entire tech stack — custom applications, WordPress sites, databases — onto optimized infrastructure. Proven 67% cost reduction with faster, more reliable deployments.',
-    icon: '☁️',
+    icon: 'cloud',
     features: [
       'Docker containerization for environment parity',
       'Nginx Proxy Manager for multi-site orchestration',
