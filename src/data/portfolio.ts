@@ -255,6 +255,161 @@ export const projects: Project[] = [
     stack: ['Kubernetes', 'PHP', 'Docker', 'Payment Integration'],
     links: [],
   },
+  {
+    name: 'Plumbing Express Solutions',
+    status: 'Featured',
+    description:
+      'High-performance local business WordPress platform built for speed and lead conversion.',
+    problem:
+      'The client needed a fast, reliable 24/7 service platform with zero downtime and optimized local SEO structure.',
+    contributions: [
+      'Engineered custom WordPress layout and features',
+      'Optimized site speed and Core Web Vitals',
+      'Configured secure server deployment',
+    ],
+    stack: ['WordPress', 'PHP', 'CSS3', 'DigitalOcean', 'Nginx'],
+    links: [
+      { label: 'Live', href: 'https://plumbingexpresssolutions.com/' },
+    ],
+  },
+  {
+    name: 'Grandpa\'s Dairy',
+    status: 'Featured',
+    description:
+      'Specialized e-commerce and product catalog WordPress web platform for farm-fresh dairy distribution.',
+    problem:
+      'Needed a secure, scalable product showcasing and ordering environment adhering to strict family recipe branding and easy category management.',
+    contributions: [
+      'Built custom product management workflows',
+      'Optimized WooCommerce performance',
+      'Implemented secure SSL/DNS management',
+    ],
+    stack: ['WordPress', 'WooCommerce', 'PHP', 'MySQL', 'Cloudflare'],
+    links: [
+      { label: 'Live', href: 'https://grandpasdairy.au/' },
+    ],
+  },
+  {
+    name: 'Blistik Ads & Digital Tech',
+    status: 'Featured',
+    description:
+      'Digital marketing and technology solutions platform featuring custom interactive layouts.',
+    problem:
+      'Required high-end professional UI elements and clean custom code integration without relying on bloated page builder plugins.',
+    contributions: [
+      'Developed custom WordPress themes',
+      'Integrated responsive UI components',
+      'Tuned performance metrics for fast asset loading',
+    ],
+    stack: ['WordPress', 'Custom PHP', 'JavaScript', 'Tailwind/CSS'],
+    links: [
+      { label: 'Live', href: 'https://blistik.com/' },
+    ],
+  },
+  {
+    name: 'PageOne247 Corporate Portal',
+    status: 'Featured',
+    description:
+      'Central infrastructure and development agency hub managing multiple containerized services.',
+    problem:
+      'Needed robust hosting coordination, unified proxy configurations, and high-security deployment pipelines.',
+    contributions: [
+      'Containerized deployment environments via Docker Compose and Nginx Proxy Manager',
+      'Optimized multi-site management',
+      'Slashed hosting overhead',
+    ],
+    stack: ['WordPress', 'Docker', 'Nginx Proxy Manager', 'DigitalOcean'],
+    links: [
+      { label: 'Live', href: 'https://pageone247.com/' },
+    ],
+  },
+  {
+    name: 'Enterprise Client Solutions',
+    status: 'Featured',
+    description:
+      'Portfolio of custom-coded enterprise WordPress deployments, directory integrations, and performance-tuned regional sites.',
+    problem:
+      'Clients faced site-speed degradation, plugin bloat, and fragmented security environments across various hosting providers.',
+    contributions: [
+      'Executed zero-downtime migrations',
+      'Cleaned custom PHP codebases',
+      'Hardened cPanel/WordPress security',
+      'Set up automated SSL pipelines',
+    ],
+    stack: ['WordPress', 'PHP', 'MySQL', 'cPanel', 'SSL / DNS Management'],
+    links: [
+      { label: 'databasy.io', href: 'https://databasy.io/' },
+      { label: 'glitteratiperformanceco.com', href: 'https://glitteratiperformanceco.com/' },
+      { label: 'princeig.com.au', href: 'https://princeig.com.au/' },
+      { label: 'globalspec.com.au', href: 'https://globalspec.com.au/' },
+    ],
+  },
+  {
+    name: 'Muscle Prime',
+    status: 'Featured',
+    description:
+      'High-performance e-commerce and fitness web platform featuring real-time user verification and scalable cloud infrastructure.',
+    problem:
+      'The application needed smooth version notification management during updates, secure real-time payment verification, and long-term infrastructure scalability.',
+    contributions: [
+      'Implemented real-time version notification modals',
+      'Integrated secure e-path payment systems with live verification',
+      'Initiated the transition to Kubernetes for enhanced fault tolerance',
+    ],
+    stack: ['PHP', 'Kubernetes', 'Docker', 'Payment Integration', 'Backend API'],
+    links: [
+      { label: 'Live', href: 'https://muscleprime.ai/' },
+    ],
+  },
+  {
+    name: 'Fighter Hive',
+    status: 'Featured',
+    description:
+      'Specialized combat sports and community web platform optimized for high-concurrency zero-downtime deployments.',
+    problem:
+      'Maintaining absolute uptime and reliable container health checks during rapid feature releases and high traffic spikes.',
+    contributions: [
+      'Engineered and optimized frontend/backend architecture using Nuxt 2 and Laravel',
+      'Tailored for zero-downtime Kubernetes deployments using custom liveness and readiness probes',
+    ],
+    stack: ['Nuxt.js', 'Laravel', 'Kubernetes', 'Docker', 'MySQL'],
+    links: [
+      { label: 'Live', href: 'https://fighterhive.com/' },
+    ],
+  },
+  {
+    name: 'The Drum HQ',
+    status: 'Featured',
+    description:
+      'Premium e-commerce platform and community hub for drumming enthusiasts featuring optimized speed and responsive interfaces.',
+    problem:
+      'Slow page load times and fragmented frontend UI components were impacting user engagement and conversion rates.',
+    contributions: [
+      'Enhanced UI/UX and resolved frontend bugs',
+      'Optimized database queries and frontend code to slash page load times by 40%',
+      'Implemented SEO metadata configurations',
+    ],
+    stack: ['Vue.js', 'PHP', 'MySQL', 'SEO', 'Performance Optimization'],
+    links: [
+      { label: 'Live', href: 'https://thedrumhq.com.au/' },
+    ],
+  },
+  {
+    name: 'The Final Whistle',
+    status: 'Featured',
+    description:
+      'Dynamic sports e-commerce and live engagement platform featuring real-time data streaming and staging validation workflows.',
+    problem:
+      'Managing feature rollouts safely and handling real-time interactive user engagement features without latency.',
+    contributions: [
+      'Provisioned dedicated staging environments to validate "Waiting Lounge" features prior to production release',
+      'Implemented real-time data rendering with Socket.IO to elevate user engagement',
+    ],
+    stack: ['Vue.js', 'Socket.IO', 'Staging Environments', 'Real-Time Data'],
+    links: [
+      { label: 'Live', href: 'https://tfw9s.com.au/' },
+    ],
+  },
 ]
 
 export const infrastructure: {
@@ -321,7 +476,7 @@ export const businessSolutions: BusinessSolution[] = [
     title: 'Custom Web App Architecture & Scaling',
     description:
       'End-to-end design and delivery of resilient Laravel backends and high-speed Nuxt.js/Vue.js SPAs. From database schema to CI/CD, I build applications that scale with your business.',
-    icon: 'code',
+    icon: '🚀',
     features: [
       'Laravel API development with clean architecture',
       'Nuxt.js/Vue.js frontend with SSR/SSG',
@@ -336,7 +491,7 @@ export const businessSolutions: BusinessSolution[] = [
     title: 'Advanced WordPress Engineering & Optimization',
     description:
       'Transform WordPress from a blogging tool into a powerful application platform. Custom themes, plugins, headless architectures, and performance tuning that beats any page builder.',
-    icon: 'wordpress',
+    icon: '⚡',
     features: [
       'Custom theme & plugin development (PHP, ACF)',
       'Elementor/Divi/WPBakery migration to custom code',
@@ -351,7 +506,7 @@ export const businessSolutions: BusinessSolution[] = [
     title: 'Cloud & Infrastructure Cost Optimization',
     description:
       'Consolidate your entire tech stack — custom applications, WordPress sites, databases — onto optimized infrastructure. Proven 67% cost reduction with faster, more reliable deployments.',
-    icon: 'server',
+    icon: '☁️',
     features: [
       'Docker containerization for environment parity',
       'Nginx Proxy Manager for multi-site orchestration',
