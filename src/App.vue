@@ -5,6 +5,7 @@ import HeroSection from '@/components/sections/HeroSection.vue'
 import AboutSection from '@/components/sections/AboutSection.vue'
 import SkillsSection from '@/components/sections/SkillsSection.vue'
 import ExperienceSection from '@/components/sections/ExperienceSection.vue'
+import BusinessSolutionsSection from '@/components/sections/BusinessSolutionsSection.vue'
 import ProjectsSection from '@/components/sections/ProjectsSection.vue'
 import EngineeringSection from '@/components/sections/EngineeringSection.vue'
 import ContactSection from '@/components/sections/ContactSection.vue'
@@ -23,6 +24,7 @@ import ContactSection from '@/components/sections/ContactSection.vue'
     <AboutSection />
     <SkillsSection />
     <ExperienceSection />
+    <BusinessSolutionsSection />
     <ProjectsSection />
     <EngineeringSection />
     <ContactSection />

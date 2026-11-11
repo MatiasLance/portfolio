@@ -49,29 +49,38 @@ export type InfraItem = {
   detail: string
 }
 
+export type BusinessSolution = {
+  id: string
+  title: string
+  description: string
+  icon: string
+  features: string[]
+}
+
 export const site = {
-  title: 'Marcelo Matias — Junior DevOps Engineer & Full-Stack Developer',
+  title: 'Marcelo Matias — DevOps Engineer | Full-Stack & WordPress Engineer',
   description:
-    'Junior DevOps Engineer and Full-Stack Developer in Davao City. Laravel, Nuxt.js, Docker, and Nginx. Builds and deploys production web applications.',
+    'DevOps Engineer and Full-Stack & WordPress Engineer in Davao City. Laravel, Nuxt.js, Vue.js, WordPress, Docker, and Nginx. Building scalable custom applications and high-performance WordPress ecosystems with 67% infrastructure cost reduction.',
   url: 'https://matiaslance.github.io',
 }
 
 export const profile = {
   name: 'Marcelo Matias',
   shortName: 'MM',
-  title: 'Junior DevOps Engineer & Full-Stack Developer',
+  title: 'DevOps Engineer | Full-Stack & WordPress Engineer',
   location: 'Davao City, Philippines',
   email: 'marcelomatias.0198@gmail.com',
-  availability: 'Open to conversations about full-stack and infrastructure work.',
+  availability: 'Open to conversations about full-stack, WordPress, and infrastructure work.',
   summary:
-    'I build and operate production web applications—Laravel and Nuxt.js on the product side, Docker, Nginx, and DigitalOcean on the infrastructure side. I care about repeatable releases, consistent environments, and systems that stay inexpensive to run.',
+    'Versatile DevOps Engineer and Full-Stack Web Developer with 4+ years of experience engineering scalable custom web apps and high-performance WordPress ecosystems. Proven expertise in Laravel, Nuxt.js, Docker, Nginx, and custom CMS architecture, with a track record of automating deployment workflows and cutting hosting costs by 67% (from $1,200 to $400/month). Adept at bridging development and operations to deliver high-performance systems, with expanding hands-on knowledge in Kubernetes and AI-assisted development.',
   about: [
-    'I am a Junior DevOps Engineer and Full-Stack Developer based in Davao City, working at PageOne247 since 2022. Most of my work sits at the boundary between writing application code and keeping that code running in production.',
-    'That usually means containerizing Laravel and Nuxt applications, placing them behind Nginx, and automating the release path with Bash. On one DigitalOcean Droplet I consolidated five projects through a reverse proxy and reduced hosting costs by 40%. Deployment scripts I wrote brought a typical release from thirty minutes down to ten.',
-    'I also build custom WordPress features when a plugin is the wrong fit, and I spend time on MySQL when applications start to feel slow. I am currently deepening my Kubernetes knowledge and using AI-assisted tools as part of day-to-day development.',
+    'I am a DevOps Engineer and Full-Stack & WordPress Engineer based in Davao City, working at PageOne247 since 2022. My work sits at the intersection of custom web application development (Laravel, Nuxt.js, Vue.js) and enterprise WordPress engineering — building both from the ground up and optimizing existing ecosystems.',
+    'On the infrastructure side, I containerize applications with Docker, orchestrate them behind Nginx Proxy Manager on DigitalOcean Droplets, and automate releases with Bash — consolidating 10 projects (custom apps and WordPress sites) onto optimized infrastructure and reducing hosting costs by 67% (from $1,200 to $400/month). Deployment scripts cut release time from 30 minutes to 10.',
+    'On the WordPress side, I engineer custom PHP solutions when plugins fall short — advanced theme/plugin development, Elementor/Divi/WPBakery optimization, Core Web Vitals tuning, secure payment gateway integrations, and headless WordPress with Nuxt.js frontends. I treat WordPress as a first-class application platform, not a blogging tool.',
+    'I am currently deepening my Kubernetes knowledge and integrating AI-assisted tools (Cursor, DeepSeek, GitHub Copilot, Opencode) into daily development workflows.',
   ],
   philosophy:
-    'Keep infrastructure boring and observable. Automate the path from commit to production. Treat application code and the environment it runs in as one problem, not two.',
+    'Keep infrastructure boring and observable. Automate the path from commit to production. Treat application code and the environment it runs in as one problem — whether it\'s a custom Laravel API or a WordPress multisite fleet.',
   education: {
     degree: 'Bachelor of Science in Information Technology',
     school: "St. Mary's College of Bansalan, Inc.",
@@ -81,15 +90,16 @@ export const profile = {
 
 export const highlights = [
   { value: '4+', label: 'Years of production work' },
-  { value: '40%', label: 'Hosting cost reduction' },
+  { value: '67%', label: 'Hosting cost reduction' },
   { value: '30m → 10m', label: 'Typical release time' },
-  { value: '5 → 1', label: 'Apps on one Droplet' },
+  { value: '10 → 1', label: 'Projects consolidated' },
 ]
 
 export const nav: NavItem[] = [
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
   { id: 'experience', label: 'Experience' },
+  { id: 'business-solutions', label: 'Business Solutions' },
   { id: 'work', label: 'Work' },
   { id: 'infrastructure', label: 'Infrastructure' },
   { id: 'contact', label: 'Contact' },
@@ -101,41 +111,31 @@ export const social: SocialLink[] = [
   { label: 'Email', href: 'mailto:marcelomatias.0198@gmail.com' },
 ]
 
-export const skills: SkillGroup[] = [
+export const skills = [
   {
-    id: 'frontend',
-    label: 'Frontend',
-    items: ['Vue.js', 'Nuxt.js', 'JavaScript', 'WordPress (custom code, Elementor, Divi, WPBakery)'],
-  },
-  {
-    id: 'backend',
-    label: 'Backend',
-    items: ['Laravel (PHP)', 'RESTful APIs', 'SQL optimization'],
+    id: 'custom-apps',
+    label: 'Custom Web Applications',
+    items: ['Laravel (PHP)', 'Nuxt.js', 'Vue.js', 'RESTful APIs', 'MySQL', 'SQL Optimization'],
   },
   {
     id: 'devops',
-    label: 'DevOps & infrastructure',
-    items: ['Docker', 'Docker Compose', 'Nginx', 'DigitalOcean Droplets', 'Linux / Ubuntu', 'Bash', 'cPanel'],
+    label: 'DevOps & Infrastructure',
+    items: ['Docker', 'Docker Compose', 'Nginx', 'Nginx Proxy Manager (NPM)', 'DigitalOcean', 'Linux', 'Kubernetes (Learning)'],
   },
   {
-    id: 'databases',
-    label: 'Databases',
-    items: ['MySQL'],
+    id: 'wordpress',
+    label: 'WordPress & CMS Engineering',
+    items: [
+      'Custom PHP Coding',
+      'Advanced Theme/Plugin Development',
+      'Elementor / Divi / WPBakery Optimization',
+      'Core Web Vitals & Speed Tuning',
+    ],
   },
   {
-    id: 'cloud',
-    label: 'Cloud, DNS & hosting',
-    items: ['DigitalOcean', 'Cloudflare', 'Hostinger', 'HostGator', 'SSL'],
-  },
-  {
-    id: 'tools',
-    label: 'Tools',
-    items: ['Git', 'Bitbucket', 'ChatGPT', 'GitHub Copilot', 'Codex', 'Opencode', 'DeepSeek'],
-  },
-  {
-    id: 'learning',
-    label: 'Currently learning',
-    items: ['Kubernetes'],
+    id: 'tools-ai',
+    label: 'Tools & AI Development',
+    items: ['Git', 'Bitbucket', 'Cloudflare DNS', 'SSL Implementation', 'Cursor', 'DeepSeek', 'ChatGPT', 'GitHub Copilot'],
   },
 ]
 
@@ -143,7 +143,7 @@ export const experience: ExperienceRole[] = [
   {
     company: 'PageOne247',
     title: 'Junior DevOps & Full-Stack Developer',
-    period: 'July 2022 — Present',
+    period: '07/2022 - Present',
     location: 'Davao City, Philippines',
     summary:
       'I work across application development and production operations: Laravel and Nuxt.js services, WordPress customizations, and the Docker / Nginx / DigitalOcean stack they run on.',
@@ -151,113 +151,36 @@ export const experience: ExperienceRole[] = [
       {
         title: 'Infrastructure and deployment',
         points: [
-          'Containerized applications with Docker so development and production stay consistent.',
-          'Consolidated five projects onto a single DigitalOcean Droplet using an Nginx reverse proxy, reducing hosting costs by 40%.',
-          'Automated deployment workflows with Bash scripts, cutting a typical release from 30 minutes to 10 minutes.',
-          'Researching Kubernetes approaches for scalability and fault tolerance.',
+          'Containerized production and development environments using Docker to ensure absolute system consistency.',
+          'Consolidated 10 projects (custom web applications and WordPress sites) across optimized DigitalOcean Droplets using Docker Compose and Nginx Proxy Manager (NPM), reducing monthly infrastructure costs by 67% (from $1,200 to $400/month).',
+          'Streamlined release cycles by automating deployment workflows with custom Bash scripts, cutting deployment time from 30 to 10 minutes.',
+          'Evaluated and integrated Kubernetes strategies to establish future-proof scalability and enhanced fault tolerance.',
         ],
       },
       {
         title: 'Full-stack development',
         points: [
-          'Developed and maintained Laravel and Nuxt.js applications with an emphasis on readable, maintainable code.',
-          'Built custom WordPress features when standard plugins could not cover the business requirement.',
-          'Optimized MySQL queries to improve application responsiveness.',
+          'Developed and maintained clean Laravel and Nuxt.js applications, building custom WordPress functionality beyond standard plugins.',
+          'Optimized MySQL queries to boost application responsiveness.',
         ],
       },
       {
         title: 'Systems administration and networking',
         points: [
-          'Managed DNS records and domain migrations with zero downtime.',
-          'Configured SSL certificates and hardened cPanel and WordPress environments.',
-          'Collaborated through Git and Bitbucket using structured branching.',
+          'Managed zero-downtime DNS migrations and cPanel/WordPress SSL security.',
         ],
       },
     ],
-    stack: ['Laravel', 'Nuxt.js', 'Vue.js', 'MySQL', 'Docker', 'Nginx', 'DigitalOcean', 'WordPress', 'Bash', 'Git'],
+    stack: ['Laravel', 'Nuxt.js', 'Vue.js', 'MySQL', 'Docker', 'Docker Compose', 'Nginx', 'Nginx Proxy Manager', 'DigitalOcean', 'WordPress', 'Bash', 'Git', 'Kubernetes'],
   },
 ]
 
 export const projects: Project[] = [
   {
-    name: 'DRUM HQ',
-    description:
-      'A Vue and PHP application where I focused on frontend quality, query performance, and search visibility.',
-    problem:
-      'The interface had maintainability issues and pages were slower than they needed to be for day-to-day use.',
-    contributions: [
-      'Improved UI and UX and resolved frontend bugs that were making the codebase harder to maintain.',
-      'Optimized queries and frontend code, reducing page load time by 40%.',
-      'Added SEO improvements through metadata configuration.',
-    ],
-    stack: ['Vue.js', 'PHP', 'MySQL', 'Docker', 'Nginx'],
-    links: [
-      { label: 'GitHub (compose)', href: 'https://github.com/MatiasLance/drum-hq' },
-      { label: 'Frontend', href: 'https://github.com/MatiasLance/drum-hq-frontend' },
-      { label: 'Backend', href: 'https://github.com/MatiasLance/drum-hq-backend' },
-    ],
-  },
-  {
-    name: 'TFW9S staging and production',
-    description:
-      'Staging and production deployment work for a Vue frontend and PHP backend, including a real-time waiting lounge feature.',
-    problem:
-      'A new real-time feature needed a staging environment before it could be released safely to production.',
-    contributions: [
-      'Provisioned a staging environment to validate the Waiting Lounge feature before production release.',
-      'Implemented real-time data rendering with Socket.IO to improve user engagement.',
-    ],
-    stack: ['Vue.js', 'PHP', 'Socket.IO', 'Nginx'],
-    links: [
-      { label: 'Frontend', href: 'https://github.com/MatiasLance/tfw9s-frontend' },
-      { label: 'Backend', href: 'https://github.com/MatiasLance/tfw9s-backend' },
-    ],
-  },
-  {
-    name: 'Muscle Prime infrastructure',
-    description:
-      'Application and infrastructure work on Muscle Prime, including payment verification and deployment communication.',
-    problem:
-      'Releases needed a clearer user-facing signal, and payments required a more reliable verification path.',
-    contributions: [
-      'Implemented a real-time version notification modal so users could see when a new deployment was available.',
-      'Integrated a secure e-path payment system with real-time verification.',
-      'Transitioning the project toward Kubernetes for improved scalability.',
-    ],
-    stack: ['Laravel', 'Nuxt.js', 'Docker', 'Kubernetes'],
-    links: [],
-  },
-  {
-    name: 'Client Project Tracker',
-    description:
-      'A public Vue and Laravel project tracker for digital agencies: create, update, filter, and delete client projects through a REST API and MySQL.',
-    problem:
-      'Project managers needed a focused tool for client work without standing up a heavier project-management suite.',
-    contributions: [
-      'Built a Vue 3 interface with search, status and priority filters, and sorting.',
-      'Implemented a Laravel REST API with field-level validation and seeded demo data.',
-      'Packaged frontend, backend, MySQL, and Nginx with Docker Compose using pinned images.',
-    ],
-    stack: ['Vue 3', 'Vite', 'Laravel', 'MySQL', 'Docker Compose', 'Nginx', 'TypeScript'],
-    links: [{ label: 'GitHub', href: 'https://github.com/MatiasLance/client-project-tracker' }],
-  },
-  {
-    name: 'Finly Finance — Monday.com integration',
-    description:
-      'A custom API integration that keeps financial workflow data in sync with Monday.com.',
-    problem:
-      'Financial work depended on manual updates between systems, which slowed the team down.',
-    contributions: [
-      'Built a custom API integration to automate data synchronization and streamline financial workflows.',
-    ],
-    stack: ['RESTful APIs'],
-    links: [],
-  },
-  {
-    name: 'CRM platform',
+    name: 'CRM System Development',
     status: 'In progress',
     description:
-      'An ongoing CRM built with Laravel, Docker Compose, and Nginx, with a REST API for client-server communication.',
+      'Developing a scalable CRM platform built with Laravel, Docker Compose, and Nginx, featuring RESTful API integration and AI-assisted debugging workflows.',
     problem:
       'The team needed a dedicated client-management platform rather than stretching existing tools further.',
     contributions: [
@@ -265,7 +188,71 @@ export const projects: Project[] = [
       'Implementing REST API integration for client-server communication.',
       'Using AI-assisted tools for debugging and feature delivery.',
     ],
-    stack: ['Laravel', 'Docker Compose', 'Nginx', 'REST APIs'],
+    stack: ['Laravel', 'Docker Compose', 'Nginx', 'REST API', 'AI Development Tools'],
+    links: [],
+  },
+  {
+    name: 'TFW9S Staging & Production Deployment',
+    status: 'Featured',
+    description:
+      'Provisioned staging environments to validate "Waiting Lounge" feature prior to production release and implemented real-time data rendering using Socket.IO.',
+    problem:
+      'A new real-time feature needed a staging environment before it could be released safely to production.',
+    contributions: [
+      'Provisioned a staging environment to validate the Waiting Lounge feature before production release.',
+      'Implemented real-time data rendering with Socket.IO to improve user engagement.',
+    ],
+    stack: ['Vue.js', 'Socket.IO', 'Staging', 'Real-Time Data'],
+    links: [
+      { label: 'Frontend', href: 'https://github.com/MatiasLance/tfw9s-frontend' },
+      { label: 'Backend', href: 'https://github.com/MatiasLance/tfw9s-backend' },
+    ],
+  },
+  {
+    name: 'Multi-Site WordPress Fleet Consolidation',
+    status: 'Featured',
+    description:
+      'Consolidated 10 projects (custom web applications and WordPress sites) across optimized DigitalOcean Droplets using Docker Compose and Nginx Proxy Manager, reducing monthly infrastructure costs by 67% (from $1,200 to $400/month).',
+    problem:
+      'Multiple client projects and WordPress sites were spread across separate hosting accounts, causing high overhead, inconsistent environments, and manual deployment bottlenecks.',
+    contributions: [
+      'Containerized all applications (Laravel, Nuxt.js, WordPress) with Docker for environment parity.',
+      'Orchestrated 10 projects behind Nginx Proxy Manager on optimized DigitalOcean Droplets.',
+      'Automated deployment workflows with Bash scripts, reducing release time from 30 to 10 minutes.',
+      'Achieved 67% hosting cost reduction ($1,200 → $400/month) while improving reliability.',
+    ],
+    stack: ['Docker', 'Docker Compose', 'Nginx Proxy Manager', 'DigitalOcean', 'WordPress', 'Laravel', 'Nuxt.js', 'Bash'],
+    links: [],
+  },
+  {
+    name: 'Custom WordPress Solutions & E-Commerce Integration',
+    status: 'Featured',
+    description:
+      'Engineered custom WordPress features and secure payment gateways beyond standard plugins to meet complex business requirements, including headless WordPress with Nuxt.js frontends.',
+    problem:
+      'Client requirements exceeded plugin capabilities — needing custom post types, advanced ACF layouts, secure e-path payment verification, Core Web Vitals optimization, and headless architecture.',
+    contributions: [
+      'Built custom PHP themes/plugins replacing bloated page builder stacks (Elementor, Divi, WPBakery).',
+      'Integrated secure e-path payment system with real-time verification.',
+      'Optimized Core Web Vitals and page speed scores across WordPress fleet.',
+      'Implemented headless WordPress + Nuxt.js for decoupled frontend architecture.',
+    ],
+    stack: ['WordPress', 'PHP', 'Nuxt.js', 'WooCommerce', 'Custom Plugins', 'Core Web Vitals', 'Headless CMS'],
+    links: [],
+  },
+  {
+    name: 'Muscle Prime Infrastructure Upgrade',
+    status: 'Featured',
+    description:
+      'Implemented real-time version notification modals, integrated a secure e-path payment system with real-time verification, and initiated Kubernetes transition for enhanced scalability.',
+    problem:
+      'Releases needed a clearer user-facing signal, and payments required a more reliable verification path.',
+    contributions: [
+      'Implemented a real-time version notification modal so users could see when a new deployment was available.',
+      'Integrated a secure e-path payment system with real-time verification.',
+      'Transitioning the project toward Kubernetes for improved scalability.',
+    ],
+    stack: ['Kubernetes', 'PHP', 'Docker', 'Payment Integration'],
     links: [],
   },
 ]
@@ -276,37 +263,37 @@ export const infrastructure: {
   currently: string
 } = {
   intro:
-    'Infrastructure work is not a side interest. It is part of how I ship Laravel and Vue applications: containers, reverse proxies, DNS, TLS, and the scripts that make a release repeatable.',
+    'Infrastructure work is not a side interest. It is part of how I ship Laravel, Nuxt, and WordPress applications: containers, reverse proxies, DNS, TLS, and the scripts that make a release repeatable — whether it\'s a custom API or a multisite fleet.',
   items: [
     {
       title: 'Docker and Compose',
       detail:
-        'I containerize applications so local development and production stay aligned. Client Project Tracker, for example, runs frontend, backend, MySQL, and Nginx from Compose with pinned image tags.',
+        'I containerize applications so local development and production stay aligned. The WordPress fleet and custom apps run frontend, backend, MySQL, and Nginx from Compose with pinned image tags.',
     },
     {
-      title: 'Nginx reverse proxy',
+      title: 'Nginx Proxy Manager (NPM) reverse proxy',
       detail:
-        'I placed five projects behind one Nginx reverse proxy on a single DigitalOcean Droplet. That consolidation cut hosting costs by 40% without splitting each app onto its own server.',
+        'I placed 10 projects (custom Laravel/Nuxt apps and WordPress sites) behind Nginx Proxy Manager on optimized DigitalOcean Droplets. That consolidation cut hosting costs by 67% (from $1,200 to $400/month) without splitting each app onto its own server.',
     },
     {
       title: 'Deployment automation',
       detail:
-        'Bash scripts handle the release path. The same work that used to take about 30 minutes now lands in about 10.',
+        'Bash scripts handle the release path for both custom applications and WordPress deployments. The same work that used to take about 30 minutes now lands in about 10.',
     },
     {
       title: 'Linux server management',
       detail:
-        'Day-to-day work includes Ubuntu servers, DigitalOcean Droplets, cPanel, and keeping WordPress environments patched and TLS-ready.',
+        'Day-to-day work includes Ubuntu servers, DigitalOcean Droplets, cPanel, and keeping WordPress environments patched, TLS-ready, and optimized for Core Web Vitals.',
     },
     {
       title: 'DNS and TLS',
       detail:
-        'I manage DNS across Cloudflare, Hostinger, and HostGator, including zero-downtime domain migrations and SSL certificate setup.',
+        'I manage DNS across Cloudflare, Hostinger, and HostGator, including zero-downtime domain migrations and SSL certificate setup for mixed tech stacks.',
     },
     {
       title: 'Database operations',
       detail:
-        'I operate MySQL in production and spend time on query work when application performance starts to slip.',
+        'I operate MySQL in production for both Laravel applications and WordPress, spending time on query optimization when application performance starts to slip.',
     },
   ],
   currently:
@@ -315,15 +302,63 @@ export const infrastructure: {
 
 export const expertise = [
   {
-    title: 'Application development',
-    text: 'Laravel backends, Nuxt and Vue frontends, REST APIs, and custom WordPress work when a plugin is not enough.',
+    title: 'Custom Web Application Architecture',
+    text: 'Designing and scaling Laravel backends, Nuxt.js/Vue.js frontends, and REST APIs with clean architecture, maintainable code, and performance-first mindset.',
   },
   {
-    title: 'Production operations',
-    text: 'Docker, Nginx, DigitalOcean, Linux administration, DNS, and TLS—enough to take a service from laptop to a live host.',
+    title: 'Advanced WordPress Engineering',
+    text: 'Replacing bloated plugin stacks with custom-coded themes/plugins, ACF-driven layouts, headless WordPress + Nuxt, secure payment integrations, and Core Web Vitals optimization.',
   },
   {
-    title: 'Release discipline',
-    text: 'Staging environments, deployment scripts, and structured Git and Bitbucket branching so production is not the first place a change is tested.',
+    title: 'Cloud & Infrastructure Cost Optimization',
+    text: 'Using Docker, Docker Compose, and Nginx Proxy Manager to consolidate mixed tech stacks — custom apps and WordPress fleets — saving up to 67% on hosting bills with automated, repeatable deployments.',
+  },
+]
+
+export const businessSolutions: BusinessSolution[] = [
+  {
+    id: 'custom-web-apps',
+    title: 'Custom Web App Architecture & Scaling',
+    description:
+      'End-to-end design and delivery of resilient Laravel backends and high-speed Nuxt.js/Vue.js SPAs. From database schema to CI/CD, I build applications that scale with your business.',
+    icon: 'code',
+    features: [
+      'Laravel API development with clean architecture',
+      'Nuxt.js/Vue.js frontend with SSR/SSG',
+      'RESTful & GraphQL API design',
+      'Database design & SQL optimization',
+      'Automated testing & deployment pipelines',
+      'Horizontal scaling with Docker & Kubernetes',
+    ],
+  },
+  {
+    id: 'wordpress-engineering',
+    title: 'Advanced WordPress Engineering & Optimization',
+    description:
+      'Transform WordPress from a blogging tool into a powerful application platform. Custom themes, plugins, headless architectures, and performance tuning that beats any page builder.',
+    icon: 'wordpress',
+    features: [
+      'Custom theme & plugin development (PHP, ACF)',
+      'Elementor/Divi/WPBakery migration to custom code',
+      'Headless WordPress + Nuxt.js frontends',
+      'WooCommerce customization & payment gateways',
+      'Core Web Vitals & page speed optimization',
+      'Multisite fleet management & security hardening',
+    ],
+  },
+  {
+    id: 'infrastructure-optimization',
+    title: 'Cloud & Infrastructure Cost Optimization',
+    description:
+      'Consolidate your entire tech stack — custom applications, WordPress sites, databases — onto optimized infrastructure. Proven 67% cost reduction with faster, more reliable deployments.',
+    icon: 'server',
+    features: [
+      'Docker containerization for environment parity',
+      'Nginx Proxy Manager for multi-site orchestration',
+      'DigitalOcean/AWS/GCP infrastructure design',
+      'Automated Bash/Ansible deployment scripts',
+      'SSL/TLS, DNS, and Cloudflare configuration',
+      'Monitoring, logging, and backup strategies',
+    ],
   },
 ]
