@@ -1,64 +1,8 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import {} from 'vue'
 import { businessSolutions } from '@/data/portfolio'
 import SectionHeading from '@/components/ui/SectionHeading.vue'
 
-// ROI Calculator state
-const currentMonthlySpend = ref(1200)
-const savingsPercentage = 67 // Based on proven 67% reduction metric
-
-const monthlySavings = computed(() => Math.round(currentMonthlySpend.value * (savingsPercentage / 100)))
-const newMonthlyCost = computed(() => currentMonthlySpend.value - monthlySavings.value)
-const annualSavings = computed(() => monthlySavings.value * 12)
-
-function formatCurrency(value: number): string {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(value)
-}
-
-// SVG Icon components
-const CodeIcon = {
-  name: 'CodeIcon',
-  template: `
-    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-      <path d="M9 18l6-6-6-6" />
-      <path d="M15 6l-6 6 6 6" />
-    </svg>
-  `,
-}
-
-const WordPressIcon = {
-  name: 'WordPressIcon',
-  template: `
-    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-      <circle cx="12" cy="12" r="10" />
-      <path d="M12 8v8M8 12h8" />
-    </svg>
-  `,
-}
-
-const ServerIcon = {
-  name: 'ServerIcon',
-  template: `
-    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-      <rect x="2" y="2" width="20" height="8" rx="2" />
-      <path d="M6 10v10" />
-      <path d="M10 10v10" />
-      <path d="M14 10v10" />
-      <path d="M18 10v10" />
-    </svg>
-  `,
-}
-
-const iconComponents = {
-  code: CodeIcon,
-  wordpress: WordPressIcon,
-  server: ServerIcon,
-}
 </script>
 
 <template>
@@ -81,9 +25,68 @@ const iconComponents = {
         :key="solution.id"
         class="surface-card rounded-xl border border-line p-6 hover:border-pine/50 dark:border-night-line dark:hover:border-[#7EB8B2]/50 transition-colors"
       >
-        <div class="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-pine/10 text-pine dark:bg-pine/20 dark:text-[#7EB8B2]" aria-hidden="true">
-          <component :is="iconComponents[solution.icon as keyof typeof iconComponents]" />
-        </div>
+        <div class="w-12 h-12 rounded-lg bg-pine-950/50 border border-pine-800/50 flex items-center justify-center mb-6 text-pine-400">
+  <!-- Rocket SVG for Custom Apps -->
+  <svg 
+    v-if="solution.icon === 'rocket' || solution.id === 'custom-apps'" 
+    class="w-6 h-6 stroke-current" 
+    fill="none" 
+    stroke="currentColor" 
+    viewBox="0 0 24 24" 
+    stroke-width="1.75" 
+    stroke-linecap="round" 
+    stroke-linejoin="round"
+  >
+    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.71 1.1-1.35 1.5-2.09l-2.41-2.41c-.74.4-1.38.79-2.09 1.5z"/>
+    <path d="m12 15-3-3 7.35-7.35c.78-.78 2.05-.78 2.83 0v0c.78.78.78 2.05 0 2.83L12 15z"/>
+    <path d="M9 12l-2.5-2.5"/>
+    <path d="M15 6l2.5 2.5"/>
+  </svg>
+
+  <!-- Zap / Lightning SVG for WordPress Engineering & Optimization -->
+  <svg 
+    v-else-if="solution.icon === 'zap' || solution.id === 'wordpress'" 
+    class="w-6 h-6 stroke-current" 
+    fill="none" 
+    stroke="currentColor" 
+    viewBox="0 0 24 24" 
+    stroke-width="1.75" 
+    stroke-linecap="round" 
+    stroke-linejoin="round"
+  >
+    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+  </svg>
+
+  <!-- Server Cloud / Infrastructure SVG for Cost Optimization -->
+  <svg 
+    v-else-if="solution.icon === 'cloud' || solution.id === 'cloud-cost'" 
+    class="w-6 h-6 stroke-current" 
+    fill="none" 
+    stroke="currentColor" 
+    viewBox="0 0 24 24" 
+    stroke-width="1.75" 
+    stroke-linecap="round" 
+    stroke-linejoin="round"
+  >
+    <path d="M175 19H9a5 5 0 0 1 0-10 6 6 0 0 1 11-2 4 4 0 0 1 7.5 1.5A4.5 4.5 0 0 1 17.5 19z" />
+  </svg>
+
+  <!-- Fallback Box Icon -->
+  <svg 
+    v-else 
+    class="w-6 h-6 stroke-current" 
+    fill="none" 
+    stroke="currentColor" 
+    viewBox="0 0 24 24" 
+    stroke-width="1.75" 
+    stroke-linecap="round" 
+    stroke-linejoin="round"
+  >
+    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+    <line x1="8" y1="21" x2="16" y2="21"/>
+    <line x1="12" y1="17" x2="12" y2="21"/>
+  </svg>
+</div>
         <h3 class="mt-4 font-serif text-xl font-medium text-ink dark:text-night-ink">
           {{ solution.title }}
         </h3>
@@ -103,89 +106,6 @@ const iconComponents = {
       </article>
     </div>
 
-    <!-- ROI Calculator -->
-    <div class="mt-16 rounded-xl border border-line bg-paper-raised p-6 sm:p-8 dark:border-night-line dark:bg-night-raised">
-      <div class="max-w-2xl">
-        <h3 class="font-serif text-xl font-medium text-ink dark:text-night-ink">
-          Cloud Cost & Infrastructure ROI Estimator
-        </h3>
-        <p class="mt-2 text-[15px] leading-7 text-ink-muted dark:text-night-muted">
-          Based on real results: consolidating 10 projects (custom apps + WordPress) onto optimized DigitalOcean Droplets
-          with Docker Compose and Nginx Proxy Manager reduced hosting from <strong>$1,200 → $400/month</strong> (67% savings).
-          Adjust the slider to model your current spend.
-        </p>
-
-        <div class="mt-8 space-y-6">
-          <!-- Current Spend Slider -->
-          <div>
-            <label
-              for="current-spend"
-              class="block text-sm font-medium text-ink dark:text-night-ink"
-            >
-              Current Monthly Infrastructure Spend: {{ formatCurrency(currentMonthlySpend) }}
-            </label>
-            <input
-              id="current-spend"
-              type="range"
-              min="100"
-              max="5000"
-              step="100"
-              v-model.number="currentMonthlySpend"
-              class="mt-3 w-full h-2 appearance-none bg-line rounded-lg slider-thumb dark:bg-night-line"
-              :aria-valuemin="100"
-              :aria-valuemax="5000"
-              :aria-valuenow="currentMonthlySpend"
-              aria-label="Current monthly infrastructure spend in USD"
-            />
-            <div class="mt-2 flex justify-between font-mono text-xs text-ink-faint dark:text-night-faint">
-              <span>$100</span>
-              <span>$5,000</span>
-            </div>
-          </div>
-
-          <!-- Results -->
-          <div class="grid gap-4 sm:grid-cols-3">
-            <div class="rounded-lg border border-line bg-paper p-4 dark:border-night-line dark:bg-night">
-              <p class="font-mono text-xs uppercase tracking-[0.12em] text-ink-faint dark:text-night-faint">
-                Current Monthly
-              </p>
-              <p class="mt-1 font-serif text-2xl font-medium text-ink dark:text-night-ink">
-                {{ formatCurrency(currentMonthlySpend) }}
-              </p>
-            </div>
-            <div class="rounded-lg border border-line bg-paper p-4 dark:border-night-line dark:bg-night">
-              <p class="font-mono text-xs uppercase tracking-[0.12em] text-ink-faint dark:text-night-faint">
-                Estimated Monthly
-              </p>
-              <p class="mt-1 font-serif text-2xl font-medium text-ink dark:text-night-ink">
-                {{ formatCurrency(newMonthlyCost) }}
-              </p>
-            </div>
-            <div class="rounded-lg border-2 border-pine bg-pine/5 p-4 dark:border-[#7EB8B2] dark:bg-[#7EB8B2]/10">
-              <p class="font-mono text-xs uppercase tracking-[0.12em] text-pine dark:text-[#7EB8B2]">
-                Monthly Savings
-              </p>
-              <p class="mt-1 font-serif text-2xl font-medium text-pine dark:text-[#7EB8B2]">
-                {{ formatCurrency(monthlySavings) }}
-              </p>
-            </div>
-          </div>
-
-          <div class="pt-4 border-t border-line dark:border-night-line">
-            <p class="font-mono text-xs uppercase tracking-[0.12em] text-ink-faint dark:text-night-faint">
-              Projected Annual Savings
-            </p>
-            <p class="mt-1 font-serif text-3xl font-medium text-ink dark:text-night-ink">
-              {{ formatCurrency(annualSavings) }}
-            </p>
-            <p class="mt-2 text-sm text-ink-muted dark:text-night-muted">
-              Assuming {{ savingsPercentage }}% reduction via containerization, Nginx Proxy Manager consolidation,
-              and automated deployment workflows.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
   </section>
 </template>
 
