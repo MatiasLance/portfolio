@@ -4,7 +4,7 @@
       <div
         v-if="visible"
         class="black-hole-preloader"
-        :class="exiting ? 'pointer-events-none' : 'pointer-events-auto'"
+        :class="visible && !exiting ? 'pointer-events-auto' : 'pointer-events-none'"
         role="status"
         aria-label="Loading portfolio"
       >
@@ -60,6 +60,7 @@ onBeforeUnmount(() => {
   position: fixed;
   inset: 0;
   z-index: 200;
+  pointer-events: none;
   display: grid;
   place-items: center;
   overflow: hidden;
