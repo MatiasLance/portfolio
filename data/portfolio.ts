@@ -189,7 +189,7 @@ export const projects: Project[] = [
     name: 'Multi-Site Fleet Consolidation',
     client: 'PageOne247 · Multi-client',
     category: 'cms',
-    status: 'Ongoing',
+    status: 'Completed',
     summary:
       'Consolidated ten mixed production workloads onto one containerized DigitalOcean stack—without splitting apps across servers.',
     challenge:
@@ -240,7 +240,7 @@ export const projects: Project[] = [
     name: 'Fighter Hive',
     client: 'Fighter Hive',
     category: 'web-apps',
-    status: 'Live',
+    status: 'Completed',
     summary:
       'A high-concurrency combat sports platform engineered for zero-downtime releases.',
     challenge:
@@ -282,7 +282,7 @@ export const projects: Project[] = [
     name: 'Muscle Prime',
     client: 'Muscle Prime',
     category: 'web-apps',
-    status: 'Live',
+    status: 'Completed',
     summary:
       'An e-commerce and fitness platform with real-time payment verification and a path to Kubernetes.',
     challenge:
@@ -324,7 +324,7 @@ export const projects: Project[] = [
     name: "Grandpa's Dairy",
     client: "Grandpa's Dairy",
     category: 'ecommerce',
-    status: 'Live',
+    status: 'Completed',
     summary: 'A secure, scalable WooCommerce catalog for a farm-fresh dairy brand.',
     challenge:
       'A family-run producer needed a branded ordering experience, straightforward category management, and secure transactions without a heavy platform.',
@@ -365,7 +365,7 @@ export const projects: Project[] = [
     name: 'The Final Whistle',
     client: 'The Final Whistle',
     category: 'ecommerce',
-    status: 'Live',
+    status: 'Completed',
     summary: 'Sports e-commerce with live engagement features shipped safely through staging.',
     challenge:
       'New interactive features risked production incidents and latency during peak match-day traffic.',
@@ -406,7 +406,7 @@ export const projects: Project[] = [
     name: 'The Drum HQ',
     client: 'The Drum HQ',
     category: 'ecommerce',
-    status: 'Live',
+    status: 'Completed',
     summary: 'A premium drumming community and store, rebuilt for speed.',
     challenge:
       'Slow page loads and fragmented frontend components were costing engagement and conversions.',
@@ -447,7 +447,7 @@ export const projects: Project[] = [
     name: 'Plumbing Express Solutions',
     client: 'Plumbing Express Solutions',
     category: 'cms',
-    status: 'Live',
+    status: 'Completed',
     summary: 'A fast, always-on local service site engineered for lead capture.',
     challenge:
       'The business needed a dependable 24/7 presence, local SEO structure, and zero-downtime hosting.',
@@ -490,7 +490,7 @@ export const projects: Project[] = [
     name: 'Blistik Ads & Digital Tech',
     client: 'Blistik',
     category: 'cms',
-    status: 'Live',
+    status: 'Completed',
     summary: 'A digital agency platform with custom layouts—no page-builder bloat.',
     challenge:
       'The brand needed high-end interactive UI without relying on heavy builder plugins or fragile custom markup.',
@@ -531,7 +531,7 @@ export const projects: Project[] = [
     name: 'PageOne247 Corporate Portal',
     client: 'PageOne247',
     category: 'cms',
-    status: 'Live',
+    status: 'Completed',
     summary: 'The agency’s corporate hub, running on the same consolidated container stack.',
     challenge:
       'Multiple containerized services needed unified routing, security, and coordinated releases.',
@@ -572,7 +572,7 @@ export const projects: Project[] = [
     name: 'Enterprise Client Solutions',
     client: 'Multi-client portfolio',
     category: 'cms',
-    status: 'Live',
+    status: 'Completed',
     summary:
       'Custom-coded WordPress deployments, directories, and performance-tuned regional sites.',
     challenge:
@@ -613,6 +613,58 @@ export const projects: Project[] = [
       { label: 'globalspec.com.au', href: 'https://globalspec.com.au/' },
     ],
     preview: { monogram: 'EC', tone: 'emerald', motif: 'editorial' },
+  },
+  {
+    id: 'databasy-mothership',
+    name: 'Databasy Mothership',
+    client: 'Databasy · Internal product',
+    category: 'web-apps',
+    status: 'In Progress',
+    summary:
+      'Real-time collaborative CRM and workspace platform built with Laravel 13 and Nuxt 4, broadcasting live entity updates across team tabs via Laravel Reverb WebSockets without requiring page refreshes.',
+    challenge:
+      'Team members working across separate browser tabs lost shared state, and real-time updates risked blocking database writes or leaking data to unauthorized users.',
+    solution:
+      'Built a Laravel 13 and Nuxt 4 CRM/workspace platform with a single `WorkspaceEntityChanged` event, a centralized `useRealtimeSync` client layer, Sanctum-scoped private channels, and best-effort broadcasting that keeps database transactions as the source of truth.',
+    impact: { value: 'Real-time', label: 'team-wide sync' },
+    deliverables: [
+      'Real-time CRM and workspace UI',
+      'WorkspaceEntityChanged broadcast contract',
+      'Centralized useRealtimeSync client layer',
+      'Sanctum private channel authorization',
+      'Docker Compose and Nginx deployment',
+    ],
+    architecture: [
+      {
+        label: 'Realtime',
+        detail: 'Laravel Reverb broadcasts entity changes to scoped team channels.',
+      },
+      {
+        label: 'Client',
+        detail: 'Nuxt 4 synchronizes accounts, leads, tasks, messages, workspaces, and memberships through useRealtimeSync.',
+      },
+      {
+        label: 'Security',
+        detail: 'Laravel Sanctum authorizes private channels by workspace and conversation.',
+      },
+      {
+        label: 'Delivery',
+        detail: 'Docker Compose and Nginx support local development and production builds.',
+      },
+    ],
+    integrations: ['Laravel Sanctum', 'Laravel Reverb', 'MySQL', 'Docker Compose', 'Nginx'],
+    stack: [
+      'Laravel 13',
+      'Laravel Reverb',
+      'Nuxt 4',
+      'TypeScript',
+      'Tailwind CSS',
+      'MySQL',
+      'Docker',
+      'Nginx',
+    ],
+    links: [],
+    preview: { monogram: 'DB', tone: 'violet', motif: 'dashboard' },
   },
 ]
 
@@ -667,7 +719,7 @@ export const achievements: Achievement[] = [
     phase: 'Payments',
     title: 'Shipped real-time payment verification',
     summary:
-      'Integrated e-path payments with live transaction confirmation on Muscle Prime, alongside safer version-update prompts.',
+      'Implemented reliable payment verification, checkout flows, and live transaction checks across Fighter Hive, TFW9s, and Custom Guitar Books, alongside safer release and update prompts.',
     metric: { value: 'Live', label: 'transaction checks' },
     icon: 'payments',
   },
@@ -689,6 +741,18 @@ export const achievements: Achievement[] = [
     metric: { value: '40%', label: 'faster loads' },
     icon: 'performance',
   },
+  {
+    id: 'seo-indexing',
+    phase: 'SEO & INDEXING',
+    title: 'Ranked client sites on Google through SEO & indexing',
+    summary:
+      'Improved search discoverability and indexing across client sites including thedrumhq.com.au, tfw9s.com.au, and customguitarbooks.com by refining metadata and site structure, submitting XML sitemaps, inspecting URLs in Google Search Console, and optimizing page performance.',
+    metric: {
+      value: 'thedrumhq.com.au · tfw9s.com.au · customguitarbooks.com',
+      label: 'indexed domains',
+    },
+    icon: 'seo',
+  },
 ]
 
 export const techCategories: TechCategory[] = [
@@ -697,14 +761,14 @@ export const techCategories: TechCategory[] = [
     label: 'Frontend',
     description: 'Interfaces that stay fast as they grow.',
     icon: 'frontend',
-    items: ['Nuxt.js', 'Vue.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'Core Web Vitals'],
+    items: ['Nuxt.js', 'Vue.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'Core Web Vitals', 'HTML', 'CSS', 'Bootstrap', 'SEO'],
   },
   {
     id: 'backend',
     label: 'Backend & Data',
     description: 'APIs and schemas built for real workloads.',
     icon: 'backend',
-    items: ['Laravel', 'PHP', 'MySQL', 'REST APIs', 'SQL Optimization', 'Socket.IO'],
+    items: ['Laravel', 'PHP', 'MySQL', 'REST APIs', 'SQL Optimization', 'Socket.IO', 'Node', 'Express', 'Python', 'Flask'],
   },
   {
     id: 'cloud',
@@ -718,9 +782,11 @@ export const techCategories: TechCategory[] = [
       'Nginx Proxy Manager',
       'DigitalOcean',
       'Linux',
+      'HostGator',
       'Bash',
       'Cloudflare',
-      'Kubernetes (learning)',
+      "Let's Encrypt Auto-SSL",
+      'Kubernetes',
     ],
   },
   {
@@ -729,13 +795,25 @@ export const techCategories: TechCategory[] = [
     description: 'Revenue paths, measured end to end.',
     icon: 'payments',
     items: [
-      'Payment Gateways',
+      'Stripe',
+      'Square',
+      'Afterpay',
+      'PayPal',
       'e-path Integration',
       'WooCommerce',
-      'Real-time Verification',
-      'SSL / TLS',
+      'Payment Webhooks',
       'Conversion Tracking',
+      'Google Search Console',
+      'Meta Pixel',
+      'TikTok Pixel',
     ],
+  },
+  {
+    id: 'automation',
+    label: 'Automation & Workflows',
+    description: 'Connected tools that eliminate manual ops.',
+    icon: 'automation',
+    items: ['Zapier', 'n8n', 'HubSpot', 'monday.com'],
   },
 ]
 

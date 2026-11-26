@@ -128,7 +128,7 @@ export interface Project {
   name: string
   client: string
   category: ProjectCategory
-  status: 'Live' | 'Ongoing'
+  status: 'Completed' | 'In Progress'
   summary: string
   challenge: string
   solution: string
@@ -153,6 +153,7 @@ export type AchievementIconName =
   | 'payments'
   | 'security'
   | 'performance'
+  | 'seo'
 
 export interface Achievement {
   id: string
@@ -177,7 +178,7 @@ export interface CurrentRole {
 /* Tech stack                                                                  */
 /* -------------------------------------------------------------------------- */
 
-export type TechIconName = 'frontend' | 'backend' | 'cloud' | 'payments'
+export type TechIconName = 'frontend' | 'backend' | 'cloud' | 'payments' | 'automation'
 
 export interface TechCategory {
   id: string

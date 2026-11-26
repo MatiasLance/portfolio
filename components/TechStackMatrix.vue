@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Cloud, CodeXml, CreditCard, Database, Layers } from 'lucide-vue-next'
+import { Cloud, CodeXml, CreditCard, Database, Layers, Workflow } from 'lucide-vue-next'
 import type { Component } from 'vue'
 import { sectionCopy, stackNote, techCategories } from '~/data/portfolio'
 import type { TechIconName } from '~/types/portfolio'
@@ -11,6 +11,7 @@ const techIcons = {
   backend: Database,
   cloud: Cloud,
   payments: CreditCard,
+  automation: Workflow,
 } satisfies Record<TechIconName, Component>
 </script>
 
@@ -28,10 +29,11 @@ const techIcons = {
         title-id="stack-title"
       />
 
-      <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="mt-12 grid gap-4 sm:grid-cols-2 md:grid-cols-2">
         <article
           v-for="(category, index) in techCategories"
           :key="category.id"
+          :class="index === techCategories.length - 1 ? 'sm:col-span-2 md:col-span-2' : ''"
           class="group relative flex flex-col overflow-hidden rounded-2xl border border-line bg-surface/30 p-5 transition duration-300 ease-out-expo hover:-translate-y-0.5 hover:border-line-strong hover:bg-surface/50 hover:shadow-card"
         >
           <div
