@@ -3,6 +3,7 @@ import {
   Building2,
   CreditCard,
   Gauge,
+  Search,
   Server,
   ShieldCheck,
   TrendingDown,
@@ -22,6 +23,7 @@ const achievementIcons = {
   payments: CreditCard,
   security: ShieldCheck,
   performance: Gauge,
+  seo: Search,
 } satisfies Record<AchievementIconName, Component>
 </script>
 

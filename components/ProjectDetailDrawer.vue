@@ -97,8 +97,15 @@ async function goToContact() {
             <div class="px-5 py-6 sm:px-7 sm:py-8">
               <div class="flex flex-wrap items-center gap-2">
                 <span class="pill">{{ categoryLabel }}</span>
-                <span class="pill">
-                  <span class="mr-1.5 h-1.5 w-1.5 rounded-full bg-white" aria-hidden="true" />
+                <span
+                  class="pill uppercase tracking-[0.14em]"
+                  :class="project.status === 'In Progress' ? 'border-white/30 text-neutral-300' : ''"
+                >
+                  <span
+                    v-if="project.status !== 'In Progress'"
+                    class="mr-1.5 h-1.5 w-1.5 rounded-full bg-white"
+                    aria-hidden="true"
+                  />
                   {{ project.status }}
                 </span>
               </div>

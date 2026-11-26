@@ -57,6 +57,8 @@ useHead({
 
 <template>
   <div id="top" class="relative min-h-screen overflow-x-clip">
+    <BlackHolePreloader />
+
     <a href="#main-content" class="skip-link">Skip to content</a>
 
     <AppNavbar />

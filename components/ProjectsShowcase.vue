@@ -69,7 +69,7 @@ watch(activeFilter, () => {
           class="hidden shrink-0 items-center gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500 lg:flex"
         >
           <span class="h-px w-8 bg-line-strong" aria-hidden="true" />
-          {{ projects.length }} live builds
+          {{ projects.length }} case studies
         </div>
       </div>
 

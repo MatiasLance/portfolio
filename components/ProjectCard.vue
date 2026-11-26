@@ -175,17 +175,26 @@ const hostname = computed(() => {
           {{ categoryLabel }}
         </span>
 
-        <a
-          v-if="primaryLink"
-          :href="primaryLink.href"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex min-h-8 items-center gap-1 rounded-md text-[11px] font-medium text-neutral-400 transition-colors hover:text-white"
-        >
-          Live site
-          <ArrowUpRight class="h-3 w-3" aria-hidden="true" />
-          <span class="sr-only">(opens in a new tab)</span>
-        </a>
+        <div class="flex items-center gap-2">
+          <span
+            v-if="project.status === 'In Progress'"
+            class="rounded border border-white/30 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-neutral-300"
+          >
+            In Progress
+          </span>
+
+          <a
+            v-if="primaryLink"
+            :href="primaryLink.href"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex min-h-8 items-center gap-1 rounded-md text-[11px] font-medium text-neutral-400 transition-colors hover:text-white"
+          >
+            Live site
+            <ArrowUpRight class="h-3 w-3" aria-hidden="true" />
+            <span class="sr-only">(opens in a new tab)</span>
+          </a>
+        </div>
       </div>
 
       <h3 class="mt-2.5 text-lg font-semibold tracking-[-0.02em] text-white sm:text-xl">
