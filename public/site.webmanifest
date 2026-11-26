@@ -1,16 +1,20 @@
 {
-  "name": "Marcelo Matias",
-  "short_name": "Matias",
-  "description": "Junior DevOps Engineer and Full-Stack Developer",
+  "name": "Marcelo Matias — Full-Stack & Infrastructure Engineer",
+  "short_name": "Marcelo Matias",
+  "description": "Full-stack and infrastructure engineer building Laravel, Nuxt, and WordPress platforms that cut hosting costs, compress release cycles, and hold up in production.",
+  "lang": "en",
   "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#F3F0E8",
-  "theme_color": "#0F6B63",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "categories": ["business", "developer", "portfolio"],
   "icons": [
     {
       "src": "./favicon.svg",
       "sizes": "any",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ]
 }

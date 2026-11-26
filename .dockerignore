@@ -1,6 +1,8 @@
 .git
 .github
 .cursor
+.nuxt
+.output
 dist
 node_modules
 *.log
