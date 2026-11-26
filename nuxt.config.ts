@@ -24,6 +24,11 @@ export default defineNuxtConfig({
         { name: 'color-scheme', content: 'dark' },
         { name: 'author', content: 'Marcelo Matias' },
         { name: 'robots', content: 'index, follow' },
+        {
+          'http-equiv': 'Content-Security-Policy',
+          content:
+            "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https: ws: wss:; media-src 'self' data: blob: https:; object-src 'none'; base-uri 'self'; form-action 'self';",
+        },
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
