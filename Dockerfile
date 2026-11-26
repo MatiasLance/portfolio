@@ -1,4 +1,4 @@
-FROM node:22.14.0-alpine AS build
+FROM node:22-alpine AS build
 
 WORKDIR /app
 
@@ -7,16 +7,16 @@ RUN npm ci
 
 COPY . .
 
-ARG VITE_BASE=./
-ARG VITE_SITE_URL=https://matiaslance.github.io
-ENV VITE_BASE=$VITE_BASE
-ENV VITE_SITE_URL=$VITE_SITE_URL
+ARG NUXT_APP_BASE_URL=/
+ARG NUXT_PUBLIC_SITE_URL=https://matiaslance.github.io
+ENV NUXT_APP_BASE_URL=$NUXT_APP_BASE_URL
+ENV NUXT_PUBLIC_SITE_URL=$NUXT_PUBLIC_SITE_URL
 
-RUN npm run build
+RUN npm run generate
 
 FROM nginx:1.27.4-alpine
 
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build /app/.output/public /usr/share/nginx/html
 
 EXPOSE 80

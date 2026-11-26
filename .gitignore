@@ -1,7 +1,14 @@
 # Dependencies
 node_modules
 
-# Build
+# Nuxt build output
+.nuxt
+.output
+.data
+.nitro
+.cache
+
+# Legacy Vite output
 dist
 dist-ssr
 *.local

@@ -1,28 +1,137 @@
 # Marcelo Matias — Portfolio
 
-Personal portfolio for Marcelo Matias, Junior DevOps Engineer and Full-Stack Developer. The site is a static Vue 3 application designed for GitHub Pages.
+An executive portfolio for a full-stack and infrastructure engineer. The site positions production work as measurable business outcomes: lower hosting costs, faster releases, resilient platforms, and revenue-critical integrations.
 
-Live content is taken from the resume and from public GitHub repositories under [MatiasLance](https://github.com/MatiasLance). Nothing in the project list is invented.
+Built with Nuxt 3 and deployed as a fully static site to GitHub Pages. No backend is required.
 
-## Technologies
+## Stack
 
-- Vue 3
-- TypeScript
-- Vite
-- Tailwind CSS
-- Docker / Docker Compose
-- Nginx
-- GitHub Actions / GitHub Pages
+- Nuxt 3 / Vue 3 with `<script setup lang="ts">`
+- TypeScript with strict content contracts
+- Tailwind CSS with a custom dark design system
+- `lucide-vue-next` icons and custom inline SVG solution icons
+- Plus Jakarta Sans + JetBrains Mono
+- Nitro static generation
+- Docker / Nginx for container hosting
+- GitHub Actions / GitHub Pages for deployment
 
-No backend is required. Routing is handled with in-page section anchors rather than Vue Router, which avoids GitHub Pages 404 issues on refresh.
+## Project structure
 
-## Local development (Docker Compose)
+```text
+app.vue                      Page shell, SEO metadata, Person JSON-LD
+components/
+  AppNavbar.vue              Sticky glass header, active section, mobile drawer
+  HeroSection.vue            Outcome headline, dual CTAs, metrics strip
+  SolutionsGrid.vue          Four engagement offers
+  ProjectsShowcase.vue       Filterable case-study grid
+  ProjectCard.vue            Browser-frame preview and outcome summary
+  ProjectDetailDrawer.vue    Accessible case-study slide-over
+  TrackRecordTimeline.vue    Role context and production milestones
+  TechStackMatrix.vue        Grouped capability matrix
+  ContactFooter.vue          Availability, direct email, inquiry form
+  ui/                        Shared heading, icon, and copy-button primitives
+composables/
+  useActiveSection.ts        Scroll-spy for navigation
+  useDialog.ts               Focus trap, scroll lock, inert background
+data/portfolio.ts            All site copy, projects, metrics, and links
+types/portfolio.ts           Strict interfaces for every content shape
+assets/css/main.css          Tailwind layers and design-system primitives
+public/                      Favicon, manifest, robots, sitemap
+```
 
-Docker Compose is the primary way to run this project.
+Content is fully decoupled from presentation. Components read from `data/portfolio.ts`; edit that file rather than hard-coding copy into templates.
 
-### Production image (Nginx)
+## Local development
 
-This is the same path used for a containerized preview: Vite builds the static site, then Nginx serves it.
+Node.js 22 or later is recommended.
+
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+### Scripts
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Nuxt development server with hot reload |
+| `npm run typecheck` | Vue and TypeScript checking |
+| `npm run generate` | Static build in `.output/public` |
+| `npm run preview` | Preview the generated site |
+| `npm run build` | Nitro server build, if you later add a backend |
+
+## Editing content
+
+Open `data/portfolio.ts`. The main exports are:
+
+- `site` — page title, description, canonical URL, social image
+- `profile` — name, role, location, email, availability, social links
+- `hero` — headline, value proposition, CTAs, partner snapshot
+- `metrics` — the four proof points below the hero
+- `solutions` — the four engagement offers
+- `projectCategories` / `projects` — filters and full case studies
+- `currentRole` / `achievements` — track-record content
+- `techCategories` / `stackNote` — stack matrix content
+- `contactScopes` — inquiry form scope options
+- `sectionCopy` — headings and descriptions for every section
+
+### Adding a case study
+
+Add a `Project` object to `projects` with:
+
+- a unique `id`
+- a `category` matching one of `projectCategories`
+- `challenge`, `solution`, and a quantified `impact`
+- four `architecture` layers
+- `deliverables`, `integrations`, `stack`, and `links`
+- a `preview` object with `monogram`, `tone`, and `motif`
+
+The card preview is rendered in CSS, so no screenshot asset is required. `tone` controls the accent palette (`blue`, `emerald`, `violet`, `amber`) and `motif` selects the mock interface (`dashboard`, `commerce`, `editorial`).
+
+If you change the shape of the content, update `types/portfolio.ts` at the same time. The build runs with strict TypeScript.
+
+## Contact form
+
+The inquiry form validates on the client and prepares a `mailto:` draft containing the name, email, company, selected scope, and project context. It does not send data to a server.
+
+To connect a real form backend, replace the `window.location.href = draftHref.value` line in `components/ContactFooter.vue` with a `$fetch` call to your endpoint. Keep the existing validation and success state. Update `profile.email` in `data/portfolio.ts` to change the destination address.
+
+## Quality checks
+
+```bash
+npm run typecheck
+npm run generate
+npm run preview
+```
+
+The layout is designed and checked from 320px through 1440px and wider. It includes a skip link, visible focus states, labeled form fields, an accessible focus-trapped drawer, and reduced-motion support.
+
+## Deployment
+
+### GitHub Pages
+
+The workflow at `.github/workflows/deploy.yml` runs on pushes to `main` and can be triggered manually. It installs dependencies, runs `npm run generate`, and publishes `.output/public`.
+
+In the repository settings:
+
+1. Open **Settings → Pages**.
+2. Set **Source** to **GitHub Actions**.
+3. Add repository variables if your URL differs from the defaults.
+
+| Variable | Default | Use |
+| --- | --- | --- |
+| `NUXT_PUBLIC_SITE_URL` | `https://matiaslance.github.io` | Canonical URL, Open Graph, JSON-LD |
+| `NUXT_APP_BASE_URL` | `/` | Set to `/<repo>/` for a project Pages site |
+
+For a user site such as `https://matiaslance.github.io`, keep the base URL as `/`. For `https://<user>.github.io/<repo>/`, set `NUXT_APP_BASE_URL` to `/<repo>/`.
+
+The generated output includes `.nojekyll` from `public/`, so GitHub Pages serves Nuxt's `_nuxt/` assets correctly.
+
+### Docker
+
+Build the static site and serve it with Nginx:
 
 ```bash
 docker compose up --build -d
@@ -35,136 +144,29 @@ docker compose logs -f
 docker compose down
 ```
 
-Copy `.env.example` to `.env` if you want to change the host port (`PORT=8080`) or the Vite build args.
+Copy `.env.example` to `.env` to change the host port, base URL, or canonical site URL. Nginx caches `_nuxt/` assets immutably and falls back to `index.html` for anchor-based navigation.
 
-### Development with hot reload
+For hot reload inside Docker:
 
 ```bash
 docker compose -f docker-compose.dev.yml up
 ```
 
-Open [http://localhost:5173](http://localhost:5173). Source files are mounted into the container, so edits refresh in the browser.
+Open [http://localhost:3000](http://localhost:3000).
 
-### Without Docker
-
-Node.js 20 or later is recommended.
+If a previous dependency install was interrupted and the dev container fails with `ENOTEMPTY` on `node_modules`, reset the dependency volume:
 
 ```bash
-npm install
-npm run dev
+docker compose -f docker-compose.dev.yml down -v
+docker compose -f docker-compose.dev.yml up -d
 ```
 
-The development server is typically available at `http://localhost:5173`.
+## SEO assets
 
-## Production build
+- `public/favicon.svg` — MM monogram favicon
+- `public/site.webmanifest` — install metadata and theme color
+- `public/robots.txt` — crawl policy and sitemap location
+- `public/sitemap.xml` — canonical page entry
+- `app.vue` — `useSeoMeta`, canonical link, and Person structured data
 
-```bash
-npm run build
-npm run preview
-```
-
-The production output is written to `dist/`. The build also writes:
-
-- `404.html` — a copy of `index.html` for GitHub Pages fallback
-- `.nojekyll` — prevents GitHub Pages from processing the build with Jekyll
-- `robots.txt` and `sitemap.xml` — generated from `VITE_SITE_URL` and `VITE_BASE`
-
-## GitHub Pages deployment
-
-GitHub Pages still hosts the static `dist` output. Docker Compose is for local preview and any container host; it is not required for Pages.
-
-GitHub Pages is free on a **public** repository. A private repository on the free plan shows an upgrade prompt instead. You do not need GitHub Pro if the repo is public.
-
-The repository includes `.github/workflows/deploy.yml`. After you push this project to GitHub:
-
-1. Create a repository under [MatiasLance](https://github.com/MatiasLance). Two common names:
-   - `MatiasLance.github.io` — user site at `https://matiaslance.github.io/`
-   - `portfolio` — project site at `https://matiaslance.github.io/portfolio/`
-2. In the repository, open **Settings → Pages**.
-3. Set the source to **GitHub Actions**.
-4. Push to `main`. The workflow builds the site and deploys the `dist` folder.
-
-### Base path
-
-The Vite `base` defaults to `./`, which works for both a user site and a project site.
-
-If you prefer an absolute base for a project site, add a repository variable:
-
-| Variable | Example | When to use |
-| --- | --- | --- |
-| `VITE_BASE` | `/portfolio/` | Project site with an absolute base |
-| `VITE_SITE_URL` | `https://matiaslance.github.io` | Canonical URL used in `sitemap.xml` |
-
-Repository variables live under **Settings → Secrets and variables → Actions → Variables**.
-
-If you add Vue Router later, use `createWebHashHistory()` or keep the generated `404.html` fallback. `createWebHistory()` alone will 404 on GitHub Pages when a path is refreshed.
-
-### First-time checklist
-
-- [ ] Repository is **public** (Settings → General → Danger Zone → Change visibility). Pages on a private repo requires a paid plan.
-- [ ] Pages source is set to GitHub Actions
-- [ ] `index.html` canonical / Open Graph URLs match the deployed address
-- [ ] `src/data/portfolio.ts` email, GitHub, and LinkedIn links are current
-
-## Project structure
-
-```text
-.
-├── .github/workflows/deploy.yml
-├── docker-compose.yml      # Production preview (Nginx)
-├── docker-compose.dev.yml  # Vite with hot reload
-├── Dockerfile
-├── nginx/default.conf
-├── public/                 # Static files copied into dist
-├── src/
-│   ├── components/
-│   │   ├── layout/         # Header, footer, theme toggle
-│   │   ├── sections/       # Page sections
-│   │   └── ui/             # Shared presentational pieces
-│   ├── composables/        # Theme and active-section state
-│   ├── data/portfolio.ts   # All portfolio content
-│   ├── App.vue
-│   ├── main.ts
-│   └── style.css
-├── index.html
-├── tailwind.config.js
-└── vite.config.ts
-```
-
-## Updating portfolio content
-
-Edit `src/data/portfolio.ts`. That file owns:
-
-- Name, title, summary, and about copy
-- Navigation labels
-- Email, GitHub, and LinkedIn
-- Skill groups
-- Experience
-- Projects and repository links
-- Infrastructure section copy
-- Highlight figures (only values that appear on the resume)
-
-After changing content, review the page with `docker compose -f docker-compose.dev.yml up` or `npm run dev`. Rebuild the Nginx image with `docker compose up --build` after you want to confirm the production output. Do not add companies, projects, or technologies that are not on the resume or in a public repository.
-
-## Configuring personal links
-
-In `src/data/portfolio.ts`:
-
-```ts
-export const profile = {
-  email: 'marcelomatias.0198@gmail.com',
-  // ...
-}
-
-export const social = [
-  { label: 'GitHub', href: 'https://github.com/MatiasLance' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/marcelo-matias-38618a274/' },
-  { label: 'Email', href: 'mailto:marcelomatias.0198@gmail.com' },
-]
-```
-
-Also update the canonical and Open Graph URLs in `index.html` once the GitHub Pages address is final.
-
-## Theme
-
-The default theme follows `prefers-color-scheme`. The header toggle stores an explicit choice in `localStorage` under the `theme` key. Both themes keep text, borders, and buttons readable. Animations respect `prefers-reduced-motion`.
+If the production domain changes, update `NUXT_PUBLIC_SITE_URL`, `public/robots.txt`, and `public/sitemap.xml` together.

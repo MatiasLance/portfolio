@@ -24,22 +24,22 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Build site
+      - name: Generate static site
         env:
-          VITE_BASE: ${{ vars.VITE_BASE || './' }}
-          VITE_SITE_URL: ${{ vars.VITE_SITE_URL || 'https://matiaslance.github.io' }}
-        run: npm run build
+          NUXT_APP_BASE_URL: ${{ vars.NUXT_APP_BASE_URL || '/' }}
+          NUXT_PUBLIC_SITE_URL: ${{ vars.NUXT_PUBLIC_SITE_URL || 'https://matiaslance.github.io' }}
+        run: npm run generate
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: .output/public
 
   deploy:
     needs: build

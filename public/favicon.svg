@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Marcelo Matias">
-  <rect width="32" height="32" rx="4" fill="#141210"/>
-  <text x="16" y="21" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="600" fill="#F3EEE4">MM</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Marcelo Matias">
+  <rect width="64" height="64" rx="14" fill="#000000" />
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="13.25" fill="none" stroke="#FFFFFF" stroke-opacity="0.15" stroke-width="1.5" />
+  <text x="32" y="40" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif" font-size="21" font-weight="700" letter-spacing="-1" fill="#FFFFFF">MM</text>
 </svg>
