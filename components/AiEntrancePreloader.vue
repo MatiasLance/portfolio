@@ -70,16 +70,16 @@ onMounted(() => {
   previousOverflow = document.body.style.overflow
   document.body.style.overflow = 'hidden'
 
-  const nameStart = 90
-  const nameInterval = 24
-  const roleStart = nameStart + nameChars.length * nameInterval + 160
-  const roleInterval = 13
-  const stackStart = roleStart + roleChars.length * roleInterval + 300
-  const pillInterval = 40
-  const pillDuration = 300
+  const nameStart = 180
+  const nameInterval = 48
+  const roleStart = nameStart + nameChars.length * nameInterval + 320
+  const roleInterval = 26
+  const stackStart = roleStart + roleChars.length * roleInterval + 600
+  const pillInterval = 80
+  const pillDuration = 600
   const stackEnd = stackStart + (stack.length - 1) * pillInterval + pillDuration
-  const exitStart = stackEnd + 80
-  const unmountAt = exitStart + 320
+  const exitStart = stackEnd + 160
+  const unmountAt = exitStart + 640
 
   nameChars.forEach((_, index) => {
     schedule(nameStart + index * nameInterval, () => {
@@ -202,7 +202,7 @@ onBeforeUnmount(() => {
   color: #ffffff;
   pointer-events: none;
   opacity: 1;
-  transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.64s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .ai-preloader.is-exiting {
@@ -215,7 +215,7 @@ onBeforeUnmount(() => {
   background:
     radial-gradient(circle at 50% 44%, rgba(255, 255, 255, 0.09), transparent 34%),
     radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.035), transparent 62%);
-  animation: ai-glow 2.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: ai-glow 4.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .ai-preloader__grid {
@@ -242,7 +242,7 @@ onBeforeUnmount(() => {
     transparent 58%
   );
   transform: translateX(-120%);
-  animation: ai-sweep 2s cubic-bezier(0.22, 0.61, 0.36, 1) 0.1s both;
+  animation: ai-sweep 4s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s both;
   mix-blend-mode: screen;
 }
 
@@ -267,7 +267,7 @@ onBeforeUnmount(() => {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.58);
-  animation: ai-status-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: ai-status-in 1s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .ai-preloader__status-dot {
@@ -276,7 +276,7 @@ onBeforeUnmount(() => {
   border-radius: 9999px;
   background: #ffffff;
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
-  animation: ai-dot 1.1s ease-in-out infinite;
+  animation: ai-dot 2.2s ease-in-out infinite;
 }
 
 .ai-preloader__status-line {
@@ -304,7 +304,7 @@ onBeforeUnmount(() => {
   letter-spacing: 0.36em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.42);
-  animation: ai-status-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+  animation: ai-status-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both;
 }
 
 .ai-preloader__name {
@@ -345,7 +345,7 @@ onBeforeUnmount(() => {
 }
 
 .ai-char.is-visible {
-  animation: ai-char-pop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: ai-char-pop 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .ai-preloader__name .ai-char,
@@ -384,7 +384,7 @@ onBeforeUnmount(() => {
 }
 
 .ai-pill.is-visible {
-  animation: ai-pill-pop 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: ai-pill-pop 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .ai-preloader__footer {
@@ -397,7 +397,7 @@ onBeforeUnmount(() => {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.3);
-  animation: ai-status-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+  animation: ai-status-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
 }
 
 .ai-preloader__footer-rule {
