@@ -122,8 +122,8 @@ In the repository settings:
 
 | Variable | Default | Use |
 | --- | --- | --- |
-| `NUXT_PUBLIC_SITE_URL` | `https://matiaslance.github.io` | Canonical URL, Open Graph, JSON-LD |
-| `NUXT_APP_BASE_URL` | `/` | Set to `/<repo>/` for a project Pages site |
+| `NUXT_APP_BASE_URL` | auto (`/<repo>/` for project sites) | Set to `/` for a user site or custom domain, or `/<repo>/` for a project Pages site |
+| `NUXT_PUBLIC_SITE_URL` | auto (`https://<user>.github.io/<repo>/`) | Canonical URL, Open Graph, JSON-LD |
 
 For a user site such as `https://matiaslance.github.io`, keep the base URL as `/`. For `https://<user>.github.io/<repo>/`, set `NUXT_APP_BASE_URL` to `/<repo>/`.
 
