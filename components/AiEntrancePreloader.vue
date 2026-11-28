@@ -1,0 +1,538 @@
+<script setup lang="ts">
+import { profile } from '~/data/portfolio'
+
+const displayName = 'Marcelo Matias'
+const displayRole = profile.role
+const displayAlias = 'Lance'
+
+const stack = [
+  'Laravel 13',
+  'Laravel Reverb',
+  'Nuxt 4',
+  'Vue 3',
+  'TypeScript',
+  'MySQL',
+  'Docker',
+  'Nginx',
+]
+
+type WordGroup = {
+  word: string
+  chars: string[]
+  offset: number
+}
+
+function groupWords(value: string): WordGroup[] {
+  let offset = 0
+
+  return value.split(' ').map((word) => {
+    const chars = Array.from(word)
+    const group = { word, chars, offset }
+    offset += chars.length
+    return group
+  })
+}
+
+const nameWords = groupWords(displayName)
+const roleWords = groupWords(displayRole)
+const nameChars = Array.from(displayName)
+const roleChars = Array.from(displayRole)
+
+const visible = ref(true)
+const exiting = ref(false)
+const reducedMotion = ref(false)
+const nameCount = ref(0)
+const roleCount = ref(0)
+const stackCount = ref(0)
+
+const timers: ReturnType<typeof setTimeout>[] = []
+let previousOverflow = ''
+
+function schedule(delay: number, callback: () => void) {
+  const timer = setTimeout(callback, delay)
+  timers.push(timer)
+}
+
+function unlockScroll() {
+  if (typeof document !== 'undefined') {
+    document.body.style.overflow = previousOverflow
+  }
+}
+
+onMounted(() => {
+  reducedMotion.value = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  if (reducedMotion.value) {
+    visible.value = false
+    return
+  }
+
+  previousOverflow = document.body.style.overflow
+  document.body.style.overflow = 'hidden'
+
+  const nameStart = 180
+  const nameInterval = 48
+  const roleStart = nameStart + nameChars.length * nameInterval + 320
+  const roleInterval = 26
+  const stackStart = roleStart + roleChars.length * roleInterval + 600
+  const pillInterval = 80
+  const pillDuration = 600
+  const stackEnd = stackStart + (stack.length - 1) * pillInterval + pillDuration
+  const exitStart = stackEnd + 160
+  const unmountAt = exitStart + 640
+
+  nameChars.forEach((_, index) => {
+    schedule(nameStart + index * nameInterval, () => {
+      nameCount.value = index + 1
+    })
+  })
+
+  roleChars.forEach((_, index) => {
+    schedule(roleStart + index * roleInterval, () => {
+      roleCount.value = index + 1
+    })
+  })
+
+  stack.forEach((_, index) => {
+    schedule(stackStart + index * pillInterval, () => {
+      stackCount.value = index + 1
+    })
+  })
+
+  schedule(exitStart, () => {
+    exiting.value = true
+  })
+
+  schedule(unmountAt, () => {
+    visible.value = false
+    unlockScroll()
+  })
+})
+
+onBeforeUnmount(() => {
+  timers.forEach(clearTimeout)
+  unlockScroll()
+})
+</script>
+
+<template>
+  <Teleport to="body">
+    <div
+      v-if="visible"
+      class="ai-preloader"
+      :class="{ 'is-exiting': exiting }"
+      role="status"
+      aria-live="polite"
+      :aria-label="`AI mode initializing. ${displayName}. ${displayRole}.`"
+    >
+      <div class="ai-preloader__glow" aria-hidden="true" />
+      <div class="ai-preloader__grid" aria-hidden="true" />
+      <div class="ai-preloader__sweep" aria-hidden="true" />
+
+      <div class="ai-preloader__frame">
+        <div class="ai-preloader__status" aria-hidden="true">
+          <span class="ai-preloader__status-dot" />
+          <span>AI MODE // INITIALIZING</span>
+          <span class="ai-preloader__status-line" />
+          <span class="ai-preloader__status-code">0x{{ displayAlias.toUpperCase() }}</span>
+        </div>
+
+        <div class="ai-preloader__identity" aria-hidden="true">
+          <p class="ai-preloader__alias">{{ displayAlias }}</p>
+
+          <h1 class="ai-preloader__name">
+            <template v-for="(group, wordIndex) in nameWords" :key="`name-word-${wordIndex}`">
+              <span class="ai-word">
+                <span
+                  v-for="(char, charIndex) in group.chars"
+                  :key="`name-char-${wordIndex}-${charIndex}`"
+                  class="ai-char"
+                  :class="{ 'is-visible': group.offset + charIndex < nameCount }"
+                >{{ char }}</span>
+              </span>
+              <span v-if="wordIndex < nameWords.length - 1" class="ai-word-space">{{ ' ' }}</span>
+            </template>
+          </h1>
+
+          <p class="ai-preloader__role">
+            <template v-for="(group, wordIndex) in roleWords" :key="`role-word-${wordIndex}`">
+              <span class="ai-word">
+                <span
+                  v-for="(char, charIndex) in group.chars"
+                  :key="`role-char-${wordIndex}-${charIndex}`"
+                  class="ai-char"
+                  :class="{ 'is-visible': group.offset + charIndex < roleCount }"
+                >{{ char }}</span>
+              </span>
+              <span v-if="wordIndex < roleWords.length - 1" class="ai-word-space">{{ ' ' }}</span>
+            </template>
+          </p>
+        </div>
+
+        <div class="ai-preloader__stack" aria-hidden="true">
+          <span
+            v-for="(item, index) in stack"
+            :key="item"
+            class="ai-pill"
+            :class="{ 'is-visible': index < stackCount }"
+          >
+            {{ item }}
+          </span>
+        </div>
+
+        <p class="ai-preloader__footer" aria-hidden="true">
+          <span>PORTFOLIO / 2026</span>
+          <span class="ai-preloader__footer-rule" />
+          <span>LOADING INTERFACE</span>
+        </p>
+      </div>
+    </div>
+  </Teleport>
+</template>
+
+<style scoped>
+.ai-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #000000;
+  color: #ffffff;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.64s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ai-preloader.is-exiting {
+  opacity: 0;
+}
+
+.ai-preloader__glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 44%, rgba(255, 255, 255, 0.09), transparent 34%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.035), transparent 62%);
+  animation: ai-glow 4.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.ai-preloader__grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.28;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 58% 52% at 50% 50%, black 10%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 58% 52% at 50% 50%, black 10%, transparent 78%);
+}
+
+.ai-preloader__sweep {
+  position: absolute;
+  inset: -20% -40%;
+  background: linear-gradient(
+    100deg,
+    transparent 42%,
+    rgba(255, 255, 255, 0.12) 49%,
+    rgba(255, 255, 255, 0.26) 50%,
+    rgba(255, 255, 255, 0.12) 51%,
+    transparent 58%
+  );
+  transform: translateX(-120%);
+  animation: ai-sweep 4s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s both;
+  mix-blend-mode: screen;
+}
+
+.ai-preloader__frame {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: min(100%, 78rem);
+  min-height: min(74vh, 40rem);
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem 1.25rem;
+}
+
+.ai-preloader__status {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 9px;
+  line-height: 1;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.58);
+  animation: ai-status-in 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.ai-preloader__status-dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+  background: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+  animation: ai-dot 2.2s ease-in-out infinite;
+}
+
+.ai-preloader__status-line {
+  height: 1px;
+  flex: 1;
+  max-width: 5rem;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.28), transparent);
+}
+
+.ai-preloader__status-code {
+  color: rgba(255, 255, 255, 0.34);
+}
+
+.ai-preloader__identity {
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 3.5rem 0;
+}
+
+.ai-preloader__alias {
+  margin-bottom: 1rem;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.42);
+  animation: ai-status-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both;
+}
+
+.ai-preloader__name {
+  font-size: clamp(2.5rem, 8.5vw, 6.75rem);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+  text-transform: uppercase;
+  white-space: pre-wrap;
+}
+
+.ai-preloader__role {
+  margin-top: 1.25rem;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: clamp(0.62rem, 1.5vw, 0.82rem);
+  line-height: 1.7;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+  white-space: pre-wrap;
+}
+
+.ai-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.ai-word-space {
+  white-space: pre;
+}
+
+.ai-char {
+  display: inline-block;
+  transform-origin: 50% 72%;
+  opacity: 0;
+  transform: scale(0.42) translateY(0.16em);
+  will-change: opacity, filter, transform, text-shadow;
+}
+
+.ai-char.is-visible {
+  animation: ai-char-pop 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.ai-preloader__name .ai-char,
+.ai-preloader__role .ai-char {
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.16),
+    0 2px 0 rgba(255, 255, 255, 0.06),
+    0 14px 30px rgba(0, 0, 0, 0.95);
+}
+
+.ai-preloader__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.75rem;
+}
+
+.ai-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0.375rem;
+  background: rgba(255, 255, 255, 0.025);
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.72);
+  opacity: 0;
+  transform: scale(0.72) translateY(10px);
+  transform-origin: 50% 60%;
+  will-change: transform, opacity;
+}
+
+.ai-pill.is-visible {
+  animation: ai-pill-pop 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.ai-preloader__footer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 9px;
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  animation: ai-status-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+.ai-preloader__footer-rule {
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.18), transparent);
+}
+
+@keyframes ai-char-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.42) translateY(0.16em);
+    filter: blur(3px) brightness(2);
+    text-shadow:
+      0 0 22px rgba(255, 255, 255, 1),
+      0 0 48px rgba(255, 255, 255, 0.6);
+  }
+
+  48% {
+    opacity: 1;
+    transform: scale(1.14) translateY(0);
+    filter: blur(0) brightness(1.45);
+    text-shadow:
+      0 0 14px rgba(255, 255, 255, 0.9),
+      0 0 34px rgba(255, 255, 255, 0.38);
+  }
+
+  72% {
+    transform: scale(0.97);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0) brightness(1);
+  }
+}
+
+@keyframes ai-pill-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.72) translateY(10px);
+  }
+
+  55% {
+    opacity: 1;
+    transform: scale(1.06) translateY(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes ai-status-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ai-dot {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.8);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes ai-glow {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  45% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes ai-sweep {
+  0% {
+    opacity: 0;
+    transform: translateX(-120%);
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(120%);
+  }
+}
+
+@media (min-width: 640px) {
+  .ai-preloader__frame {
+    padding: 2rem 2.5rem;
+  }
+
+  .ai-preloader__status {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .ai-preloader__frame {
+    padding: 2.5rem 3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-preloader {
+    display: none;
+  }
+}
+</style>
