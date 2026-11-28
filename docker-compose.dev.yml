@@ -8,9 +8,11 @@ services:
     volumes:
       - .:/app
       - dev_node_modules:/app/node_modules
+      - dev_nuxt:/app/.nuxt
     environment:
       NUXT_APP_BASE_URL: /
       NUXT_PUBLIC_SITE_URL: ${NUXT_PUBLIC_SITE_URL:-https://matiaslance.github.io}
 
 volumes:
   dev_node_modules:
+  dev_nuxt:
