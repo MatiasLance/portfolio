@@ -16,6 +16,25 @@ const stack = [
   'Nginx',
 ]
 
+type WordGroup = {
+  word: string
+  chars: string[]
+  offset: number
+}
+
+function groupWords(value: string): WordGroup[] {
+  let offset = 0
+
+  return value.split(' ').map((word) => {
+    const chars = Array.from(word)
+    const group = { word, chars, offset }
+    offset += chars.length
+    return group
+  })
+}
+
+const nameWords = groupWords(displayName)
+const roleWords = groupWords(displayRole)
 const nameChars = Array.from(displayName)
 const roleChars = Array.from(displayRole)
 
@@ -24,7 +43,7 @@ const exiting = ref(false)
 const reducedMotion = ref(false)
 const nameCount = ref(0)
 const roleCount = ref(0)
-const showStack = ref(false)
+const stackCount = ref(0)
 
 const timers: ReturnType<typeof setTimeout>[] = []
 let previousOverflow = ''
@@ -51,13 +70,16 @@ onMounted(() => {
   previousOverflow = document.body.style.overflow
   document.body.style.overflow = 'hidden'
 
-  const nameStart = 220
-  const nameInterval = 46
-  const roleStart = nameStart + nameChars.length * nameInterval + 140
-  const roleInterval = 21
-  const stackStart = roleStart + roleChars.length * roleInterval + 180
-  const exitStart = stackStart + 820
-  const unmountAt = exitStart + 500
+  const nameStart = 90
+  const nameInterval = 24
+  const roleStart = nameStart + nameChars.length * nameInterval + 160
+  const roleInterval = 13
+  const stackStart = roleStart + roleChars.length * roleInterval + 300
+  const pillInterval = 40
+  const pillDuration = 300
+  const stackEnd = stackStart + (stack.length - 1) * pillInterval + pillDuration
+  const exitStart = stackEnd + 80
+  const unmountAt = exitStart + 320
 
   nameChars.forEach((_, index) => {
     schedule(nameStart + index * nameInterval, () => {
@@ -71,8 +93,10 @@ onMounted(() => {
     })
   })
 
-  schedule(stackStart, () => {
-    showStack.value = true
+  stack.forEach((_, index) => {
+    schedule(stackStart + index * pillInterval, () => {
+      stackCount.value = index + 1
+    })
   })
 
   schedule(exitStart, () => {
@@ -117,34 +141,40 @@ onBeforeUnmount(() => {
           <p class="ai-preloader__alias">{{ displayAlias }}</p>
 
           <h1 class="ai-preloader__name">
-            <span
-              v-for="(char, index) in nameChars"
-              :key="`name-${index}`"
-              class="ai-char"
-              :class="{ 'is-visible': index < nameCount }"
-            >{{ char }}</span>
+            <template v-for="(group, wordIndex) in nameWords" :key="`name-word-${wordIndex}`">
+              <span class="ai-word">
+                <span
+                  v-for="(char, charIndex) in group.chars"
+                  :key="`name-char-${wordIndex}-${charIndex}`"
+                  class="ai-char"
+                  :class="{ 'is-visible': group.offset + charIndex < nameCount }"
+                >{{ char }}</span>
+              </span>
+              <span v-if="wordIndex < nameWords.length - 1" class="ai-word-space">{{ ' ' }}</span>
+            </template>
           </h1>
 
           <p class="ai-preloader__role">
-            <span
-              v-for="(char, index) in roleChars"
-              :key="`role-${index}`"
-              class="ai-char"
-              :class="{ 'is-visible': index < roleCount }"
-            >{{ char }}</span>
+            <template v-for="(group, wordIndex) in roleWords" :key="`role-word-${wordIndex}`">
+              <span class="ai-word">
+                <span
+                  v-for="(char, charIndex) in group.chars"
+                  :key="`role-char-${wordIndex}-${charIndex}`"
+                  class="ai-char"
+                  :class="{ 'is-visible': group.offset + charIndex < roleCount }"
+                >{{ char }}</span>
+              </span>
+              <span v-if="wordIndex < roleWords.length - 1" class="ai-word-space">{{ ' ' }}</span>
+            </template>
           </p>
         </div>
 
-        <div
-          class="ai-preloader__stack"
-          :class="{ 'is-visible': showStack }"
-          aria-hidden="true"
-        >
+        <div class="ai-preloader__stack" aria-hidden="true">
           <span
             v-for="(item, index) in stack"
             :key="item"
             class="ai-pill"
-            :style="{ '--index': index }"
+            :class="{ 'is-visible': index < stackCount }"
           >
             {{ item }}
           </span>
@@ -172,7 +202,7 @@ onBeforeUnmount(() => {
   color: #ffffff;
   pointer-events: none;
   opacity: 1;
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .ai-preloader.is-exiting {
@@ -185,7 +215,7 @@ onBeforeUnmount(() => {
   background:
     radial-gradient(circle at 50% 44%, rgba(255, 255, 255, 0.09), transparent 34%),
     radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.035), transparent 62%);
-  animation: ai-glow 3.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: ai-glow 2.3s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .ai-preloader__grid {
@@ -212,7 +242,7 @@ onBeforeUnmount(() => {
     transparent 58%
   );
   transform: translateX(-120%);
-  animation: ai-sweep 2.8s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s both;
+  animation: ai-sweep 2s cubic-bezier(0.22, 0.61, 0.36, 1) 0.1s both;
   mix-blend-mode: screen;
 }
 
@@ -297,21 +327,33 @@ onBeforeUnmount(() => {
   white-space: pre-wrap;
 }
 
+.ai-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.ai-word-space {
+  white-space: pre;
+}
+
 .ai-char {
-  display: inline;
+  display: inline-block;
+  transform-origin: 50% 72%;
   opacity: 0;
+  transform: scale(0.42) translateY(0.16em);
   will-change: opacity, filter, transform, text-shadow;
 }
 
 .ai-char.is-visible {
-  animation: ai-char-in 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: ai-char-pop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.ai-preloader__name .ai-char {
+.ai-preloader__name .ai-char,
+.ai-preloader__role .ai-char {
   text-shadow:
     0 1px 0 rgba(255, 255, 255, 0.16),
     0 2px 0 rgba(255, 255, 255, 0.06),
-    0 16px 34px rgba(0, 0, 0, 0.95);
+    0 14px 30px rgba(0, 0, 0, 0.95);
 }
 
 .ai-preloader__stack {
@@ -319,6 +361,7 @@ onBeforeUnmount(() => {
   flex-wrap: wrap;
   gap: 0.5rem;
   padding-top: 0.5rem;
+  padding-bottom: 0.75rem;
 }
 
 .ai-pill {
@@ -335,12 +378,13 @@ onBeforeUnmount(() => {
   letter-spacing: 0.08em;
   color: rgba(255, 255, 255, 0.72);
   opacity: 0;
-  transform: translateY(8px);
+  transform: scale(0.72) translateY(10px);
+  transform-origin: 50% 60%;
+  will-change: transform, opacity;
 }
 
-.ai-preloader__stack.is-visible .ai-pill {
-  animation: ai-pill-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: calc(var(--index) * 50ms);
+.ai-pill.is-visible {
+  animation: ai-pill-pop 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .ai-preloader__footer {
@@ -362,40 +406,50 @@ onBeforeUnmount(() => {
   background: linear-gradient(to right, rgba(255, 255, 255, 0.18), transparent);
 }
 
-@keyframes ai-char-in {
+@keyframes ai-char-pop {
   0% {
     opacity: 0;
-    filter: blur(2px) brightness(1.8);
-    transform: translateY(0.2em);
+    transform: scale(0.42) translateY(0.16em);
+    filter: blur(3px) brightness(2);
     text-shadow:
-      0 0 18px rgba(255, 255, 255, 0.98),
-      0 0 42px rgba(255, 255, 255, 0.48);
+      0 0 22px rgba(255, 255, 255, 1),
+      0 0 48px rgba(255, 255, 255, 0.6);
   }
 
-  38% {
+  48% {
     opacity: 1;
-    filter: blur(0) brightness(1.3);
+    transform: scale(1.14) translateY(0);
+    filter: blur(0) brightness(1.45);
     text-shadow:
-      0 0 12px rgba(255, 255, 255, 0.85),
-      0 0 28px rgba(255, 255, 255, 0.3);
+      0 0 14px rgba(255, 255, 255, 0.9),
+      0 0 34px rgba(255, 255, 255, 0.38);
+  }
+
+  72% {
+    transform: scale(0.97);
   }
 
   100% {
     opacity: 1;
+    transform: scale(1) translateY(0);
     filter: blur(0) brightness(1);
-    transform: translateY(0);
   }
 }
 
-@keyframes ai-pill-in {
-  from {
+@keyframes ai-pill-pop {
+  0% {
     opacity: 0;
-    transform: translateY(8px);
+    transform: scale(0.72) translateY(10px);
   }
 
-  to {
+  55% {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1.06) translateY(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
 
