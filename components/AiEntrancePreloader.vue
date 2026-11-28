@@ -51,13 +51,13 @@ onMounted(() => {
   previousOverflow = document.body.style.overflow
   document.body.style.overflow = 'hidden'
 
-  const nameStart = 160
-  const nameInterval = 34
-  const roleStart = nameStart + nameChars.length * nameInterval + 70
-  const roleInterval = 16
-  const stackStart = roleStart + roleChars.length * roleInterval + 120
-  const exitStart = stackStart + 430
-  const unmountAt = exitStart + 360
+  const nameStart = 220
+  const nameInterval = 46
+  const roleStart = nameStart + nameChars.length * nameInterval + 140
+  const roleInterval = 21
+  const stackStart = roleStart + roleChars.length * roleInterval + 180
+  const exitStart = stackStart + 820
+  const unmountAt = exitStart + 500
 
   nameChars.forEach((_, index) => {
     schedule(nameStart + index * nameInterval, () => {
@@ -172,7 +172,7 @@ onBeforeUnmount(() => {
   color: #ffffff;
   pointer-events: none;
   opacity: 1;
-  transition: opacity 0.34s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .ai-preloader.is-exiting {
@@ -185,7 +185,7 @@ onBeforeUnmount(() => {
   background:
     radial-gradient(circle at 50% 44%, rgba(255, 255, 255, 0.09), transparent 34%),
     radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.035), transparent 62%);
-  animation: ai-glow 2.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: ai-glow 3.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .ai-preloader__grid {
@@ -212,7 +212,7 @@ onBeforeUnmount(() => {
     transparent 58%
   );
   transform: translateX(-120%);
-  animation: ai-sweep 1.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.1s both;
+  animation: ai-sweep 2.8s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s both;
   mix-blend-mode: screen;
 }
 
@@ -304,7 +304,7 @@ onBeforeUnmount(() => {
 }
 
 .ai-char.is-visible {
-  animation: ai-char-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: ai-char-in 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .ai-preloader__name .ai-char {
@@ -339,8 +339,8 @@ onBeforeUnmount(() => {
 }
 
 .ai-preloader__stack.is-visible .ai-pill {
-  animation: ai-pill-in 0.36s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: calc(var(--index) * 42ms);
+  animation: ai-pill-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--index) * 50ms);
 }
 
 .ai-preloader__footer {
